@@ -3,853 +3,693 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rijschool Vermeer - Haal je rijbewijs bij de beste rijschool van Bunschoten</title>
+    <title>Rijschool Vermeer — Jouw rijbewijs begint hier</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --primary-blue: #1a3b5c;
-            --accent-yellow: #e8b931;
-            --success-green: #22c55e;
-            --light-bg: #f0f9ff;
+            --blue: #1a3b5c;
+            --blue-dark: #0f2744;
+            --blue-light: #2a5a8a;
+            --yellow: #e8b931;
+            --yellow-light: #f5d76e;
+            --green: #22c55e;
+            --cream: #faf8f4;
             --white: #ffffff;
             --gray: #64748b;
-            --dark: #0f172a;
+            --dark: #0c1824;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            background: var(--cream);
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 25px;
-        }
-
-        /* Hero Section - Dynamic with stats overlay */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #2a5278 100%);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: url('https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0280-2.webp') center/cover no-repeat;
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-blue) 0%, rgba(26, 59, 92, 0.4) 40%, transparent 100%);
-            clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 650px;
-            color: white;
-            padding: 80px 0;
-        }
-
-        .hero-logo {
-            width: 200px;
-            margin-bottom: 30px;
-        }
-
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-
-        .hero-highlight {
-            color: var(--accent-yellow);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 35px;
-            opacity: 0.95;
-            font-weight: 400;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .stat-icon {
-            width: 10px;
-            height: 10px;
-            background: var(--success-green);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--success-green);
-        }
-
-        .stat-text {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background: var(--accent-yellow);
-            color: var(--primary-blue);
-            padding: 16px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(232, 185, 49, 0.3);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(232, 185, 49, 0.5);
-        }
-
-        .cta-btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            box-shadow: none;
-        }
-
-        .cta-btn-outline:hover {
-            background: white;
-            color: var(--primary-blue);
-        }
-
-        /* Diensten Section - Card layout with icons */
-        .services {
-            padding: 100px 0;
-            background: var(--light-bg);
-            position: relative;
-        }
-
-        .services::before {
-            content: '';
-            position: absolute;
-            top: -100px;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: var(--light-bg);
-            clip-path: polygon(0 50%, 100% 100%, 100% 100%, 0 100%);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            background: var(--accent-yellow);
-            color: var(--primary-blue);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            color: var(--primary-blue);
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--gray);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .service-card {
-            position: relative;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        /* ═══════════════════════════════════════
+           NAVBAR — sticky glassmorphism
+           ═══════════════════════════════════════ */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 20px 0;
             transition: all 0.4s ease;
         }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        .navbar.scrolled {
+            background: rgba(15, 39, 68, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
         }
-
-        .service-image {
-            position: relative;
-            height: 220px;
-            overflow: hidden;
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 30px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .service-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
+        .nav-logo { height: 45px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a {
+            color: white; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+            transition: color 0.3s; position: relative;
         }
-
-        .service-card:hover .service-image img {
-            transform: scale(1.1);
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--yellow); transition: width 0.3s;
         }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--yellow); color: var(--blue-dark); padding: 10px 24px;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+            transition: all 0.3s; border: none; cursor: pointer;
+        }
+        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(232,185,49,0.4); }
 
-        .service-icon {
-            position: absolute;
-            bottom: -30px;
-            left: 30px;
-            width: 70px;
-            height: 70px;
-            background: var(--accent-yellow);
-            border-radius: 50%;
-            padding: 15px;
-            box-shadow: 0 8px 25px rgba(232, 185, 49, 0.4);
+        /* ═══════════════════════════════════════
+           HERO — split design met grote stats
+           ═══════════════════════════════════════ */
+        .hero {
+            min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+            background: var(--blue-dark);
+        }
+        .hero-left {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 120px 60px 80px 80px; color: white; position: relative;
+        }
+        .hero-left::after {
+            content: ''; position: absolute; top: 0; right: -80px; bottom: 0; width: 160px;
+            background: var(--blue-dark);
+            clip-path: polygon(0 0, 50% 0, 100% 100%, 0 100%);
             z-index: 2;
         }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(232,185,49,0.15); border: 1px solid rgba(232,185,49,0.3);
+            padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            color: var(--yellow); margin-bottom: 30px; width: fit-content;
+        }
+        .hero-badge::before {
+            content: '🏆'; font-size: 1rem;
+        }
+        .hero h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 4rem; line-height: 1.1; margin-bottom: 20px; font-weight: 400;
+        }
+        .hero h1 span { color: var(--yellow); }
+        .hero-sub {
+            font-size: 1.2rem; opacity: 0.85; margin-bottom: 40px;
+            max-width: 480px; font-weight: 400;
+        }
+        .hero-ctas { display: flex; gap: 15px; margin-bottom: 60px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--yellow); color: var(--blue-dark); padding: 16px 36px;
+            border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.05rem;
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(232,185,49,0.25);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(232,185,49,0.4); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: transparent; color: white; padding: 16px 36px;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.05rem;
+            border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s;
+        }
+        .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        /* Stats strip in hero */
+        .hero-stats {
+            display: flex; gap: 40px;
+        }
+        .stat-block { text-align: left; }
+        .stat-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem; color: var(--yellow); line-height: 1;
+        }
+        .stat-label { font-size: 0.85rem; opacity: 0.7; margin-top: 5px; font-weight: 500; }
+
+        /* Hero image side */
+        .hero-right {
+            position: relative; overflow: hidden;
+        }
+        .hero-right img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .hero-right::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(15,39,68,0.2) 0%, rgba(15,39,68,0) 30%,
+                         rgba(15,39,68,0) 70%, rgba(15,39,68,0.3) 100%);
+        }
+        /* Floating review card on image */
+        .floating-review {
+            position: absolute; bottom: 40px; left: 40px; right: 40px; z-index: 3;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+            padding: 24px 30px; border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 20px;
+        }
+        .floating-score {
+            background: var(--green); color: white; width: 60px; height: 60px;
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 800; flex-shrink: 0;
+        }
+        .floating-text { color: var(--dark); }
+        .floating-text strong { display: block; font-size: 1rem; margin-bottom: 2px; }
+        .floating-text span { font-size: 0.85rem; color: var(--gray); }
+        .floating-stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; }
+
+        /* ═══════════════════════════════════════
+           DIENSTEN — horizontal scroll cards
+           ═══════════════════════════════════════ */
+        .diensten {
+            padding: 120px 0 100px; background: var(--cream);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        .section-label {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--blue); margin-bottom: 15px;
+        }
+        .section-label::before {
+            content: ''; width: 40px; height: 2px; background: var(--yellow);
+        }
+        .section-heading {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem; color: var(--blue-dark); margin-bottom: 15px; line-height: 1.2;
+        }
+        .section-desc {
+            font-size: 1.1rem; color: var(--gray); max-width: 600px; margin-bottom: 60px;
         }
 
-        .service-body {
-            padding: 50px 30px 30px;
+        .diensten-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
         }
-
-        .service-body h3 {
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-            font-weight: 700;
+        .dienst-card {
+            position: relative; border-radius: 24px; overflow: hidden;
+            height: 420px; cursor: pointer; group: true;
         }
-
-        .service-body p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
+        .dienst-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s ease;
         }
-
-        /* Waarom Vermeer Section */
-        .why-us {
-            padding: 100px 0;
-            background: white;
+        .dienst-card:hover img { transform: scale(1.1); }
+        .dienst-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(15,39,68,0.9) 100%);
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 30px; transition: background 0.3s;
         }
-
-        .why-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 70px;
-            align-items: center;
+        .dienst-card:hover .dienst-overlay {
+            background: linear-gradient(180deg, transparent 10%, rgba(15,39,68,0.95) 100%);
         }
-
-        .why-image {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            position: relative;
+        .dienst-icon {
+            width: 50px; height: 50px; margin-bottom: 15px;
+            filter: brightness(0) invert(1);
         }
-
-        .why-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+        .dienst-card h3 {
+            font-size: 1.3rem; color: white; font-weight: 700; margin-bottom: 8px;
         }
-
-        .why-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--success-green);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 700;
-            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        .dienst-card p {
+            font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.5;
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
         }
+        .dienst-card:hover p { max-height: 100px; }
 
-        .why-content h2 {
-            font-size: 2.8rem;
-            color: var(--primary-blue);
-            margin-bottom: 30px;
-            font-weight: 800;
+        /* ═══════════════════════════════════════
+           WAAROM VERMEER — bento grid
+           ═══════════════════════════════════════ */
+        .waarom {
+            padding: 100px 0; background: var(--blue-dark); color: white;
         }
+        .waarom .section-heading { color: white; }
+        .waarom .section-desc { color: rgba(255,255,255,0.7); }
 
-        .why-list {
-            list-style: none;
-        }
-
-        .why-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .why-icon {
-            width: 28px;
-            height: 28px;
-            background: var(--accent-yellow);
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-top: 3px;
-        }
-
-        .why-text h4 {
-            font-size: 1.1rem;
-            color: var(--primary-blue);
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .why-text p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 100px 0;
-            background: var(--light-bg);
-        }
-
-        .gallery-grid {
+        .bento-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
             gap: 20px;
         }
+        .bento-card {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 35px; transition: all 0.3s;
+        }
+        .bento-card:hover {
+            background: rgba(255,255,255,0.1); border-color: rgba(232,185,49,0.3);
+            transform: translateY(-5px);
+        }
+        .bento-card.featured {
+            grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 30px; align-items: center; padding: 0; overflow: hidden;
+        }
+        .bento-card.featured .bento-img {
+            height: 100%; min-height: 300px;
+        }
+        .bento-card.featured .bento-img img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .bento-card.featured .bento-text { padding: 35px 35px 35px 0; }
 
-        .gallery-item {
-            position: relative;
-            height: 300px;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s;
+        .bento-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3.5rem; color: var(--yellow); line-height: 1; margin-bottom: 10px;
+        }
+        .bento-card h3 {
+            font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;
+        }
+        .bento-card p {
+            font-size: 0.95rem; opacity: 0.7; line-height: 1.7;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.03);
+        /* ═══════════════════════════════════════
+           GALLERY — masonry-style
+           ═══════════════════════════════════════ */
+        .gallery {
+            padding: 100px 0; background: var(--cream);
         }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 250px 250px;
+            gap: 16px;
         }
+        .gallery-masonry .g-item {
+            border-radius: 16px; overflow: hidden; position: relative;
+        }
+        .gallery-masonry .g-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .gallery-masonry .g-item:hover img { transform: scale(1.08); }
+        .gallery-masonry .g-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .gallery-masonry .g-item:nth-child(4) { grid-column: span 2; }
 
-        /* Reviews Section */
+        /* ═══════════════════════════════════════
+           REVIEWS
+           ═══════════════════════════════════════ */
         .reviews {
-            padding: 100px 0;
-            background: var(--primary-blue);
-            color: white;
+            padding: 100px 0; background: var(--white);
         }
-
-        .reviews .section-title {
-            color: white;
+        .reviews-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
         }
-
-        .reviews .section-tag {
-            background: var(--accent-yellow);
-            color: var(--primary-blue);
-        }
-
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 60px;
-        }
-
         .review-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+            background: var(--cream); border-radius: 20px; padding: 35px;
+            border: 1px solid rgba(0,0,0,0.06); transition: all 0.3s;
+            position: relative;
         }
-
-        .review-stars {
-            color: var(--accent-yellow);
-            font-size: 1.3rem;
-            margin-bottom: 20px;
+        .review-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
+        .review-card::before {
+            content: '"'; position: absolute; top: 20px; right: 30px;
+            font-family: 'DM Serif Display', serif; font-size: 5rem;
+            color: var(--yellow); opacity: 0.3; line-height: 1;
         }
-
-        .review-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-style: italic;
+        .review-stars { color: var(--yellow); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 20px; }
+        .review-text { font-size: 1rem; color: var(--dark); line-height: 1.8; margin-bottom: 25px; }
+        .reviewer {
+            display: flex; align-items: center; gap: 12px;
         }
-
-        .reviewer-name {
-            font-weight: 600;
-            opacity: 0.9;
+        .reviewer-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--blue); color: white; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem;
         }
+        .reviewer-name { font-weight: 700; color: var(--dark); font-size: 0.95rem; }
+        .reviewer-detail { font-size: 0.8rem; color: var(--gray); }
 
-        /* Contact Section */
+        /* ═══════════════════════════════════════
+           CONTACT — clean card
+           ═══════════════════════════════════════ */
         .contact {
-            padding: 100px 0;
-            background: white;
+            padding: 100px 0 120px; background: var(--cream);
         }
-
-        .contact-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .contact-card {
+            background: var(--blue-dark); border-radius: 30px; overflow: hidden;
+            display: grid; grid-template-columns: 1fr 1fr;
         }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin: 50px 0;
+        .contact-info {
+            padding: 60px; color: white;
         }
-
+        .contact-info h2 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem; margin-bottom: 15px;
+        }
+        .contact-info > p {
+            opacity: 0.7; margin-bottom: 40px; font-size: 1.05rem;
+        }
         .contact-item {
-            text-align: center;
+            display: flex; align-items: center; gap: 18px; margin-bottom: 25px;
+            background: rgba(255,255,255,0.06); padding: 18px 22px; border-radius: 14px;
+        }
+        .contact-emoji { font-size: 1.5rem; flex-shrink: 0; }
+        .contact-detail strong { display: block; font-size: 0.85rem; opacity: 0.6; margin-bottom: 3px; font-weight: 500; }
+        .contact-detail a, .contact-detail span {
+            color: white; text-decoration: none; font-size: 1.1rem; font-weight: 600;
+        }
+        .contact-btns { display: flex; gap: 12px; margin-top: 35px; flex-wrap: wrap; }
+        .btn-whatsapp {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--green); color: white; padding: 14px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: all 0.3s;
+        }
+        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.3); }
+        .btn-call {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1); color: white; padding: 14px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s;
+        }
+        .btn-call:hover { background: rgba(255,255,255,0.2); }
+
+        .contact-map {
+            position: relative; min-height: 400px;
+        }
+        .contact-map iframe {
+            width: 100%; height: 100%; border: 0;
         }
 
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent-yellow);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .contact-item h3 {
-            font-size: 1.2rem;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .contact-item p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .contact-cta {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .whatsapp-btn {
-            background: var(--success-green);
-            color: white;
-        }
-
-        /* Footer */
+        /* ═══════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════ */
         footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 50px 30px;
+            background: var(--dark); color: white; text-align: center; padding: 40px 30px;
         }
+        footer p { opacity: 0.5; font-size: 0.9rem; margin-bottom: 5px; }
+        footer a { color: var(--yellow); text-decoration: none; }
 
-        footer p {
-            opacity: 0.7;
-            margin-bottom: 8px;
+        /* ═══════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════ */
+        .reveal {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
 
-        footer a {
-            color: var(--accent-yellow);
-            text-decoration: none;
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-left { padding: 120px 40px 60px; }
+            .hero-left::after { display: none; }
+            .hero-right { height: 50vh; }
+            .hero h1 { font-size: 3rem; }
+            .diensten-grid { grid-template-columns: repeat(2, 1fr); }
+            .bento-grid { grid-template-columns: 1fr 1fr; }
+            .bento-card.featured { grid-column: span 2; }
+            .gallery-masonry { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+            .gallery-masonry .g-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+            .gallery-masonry .g-item:nth-child(4) { grid-column: span 1; }
+            .contact-card { grid-template-columns: 1fr; }
         }
-
-        /* Animations */
-        .slide-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
-
-        .slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero::before,
-            .hero::after {
-                width: 100%;
-                clip-path: none;
-                opacity: 0.3;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .why-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .reviews-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .cta-group {
-                flex-direction: column;
-            }
-
-            .cta-btn {
-                text-align: center;
-            }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .stat-number { font-size: 2.2rem; }
+            .diensten-grid { grid-template-columns: 1fr; }
+            .dienst-card { height: 320px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+            .bento-card.featured .bento-img { min-height: 200px; }
+            .bento-card.featured .bento-text { padding: 25px; }
+            .gallery-masonry { grid-template-columns: 1fr; }
+            .gallery-masonry .g-item:nth-child(1) { grid-column: span 1; }
+            .reviews-row { grid-template-columns: 1fr; }
+            .section-heading { font-size: 2.2rem; }
+            .floating-review { bottom: 20px; left: 20px; right: 20px; padding: 18px; }
+            .contact-info { padding: 40px 30px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/Z_LOGO_RV_FULLCOLOR_OP.svg" alt="Rijschool Vermeer" class="nav-logo">
+            <ul class="nav-links">
+                <li><a href="#diensten">Opleidingen</a></li>
+                <li><a href="#waarom">Waarom Vermeer</a></li>
+                <li><a href="#gallery">Impressie</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Aanmelden →</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/Z_LOGO_RV_FULLCOLOR_OP.svg" alt="Rijschool Vermeer" class="hero-logo">
-                <h1>Haal je rijbewijs bij de <span class="hero-highlight">beste rijschool</span> van Bunschoten</h1>
-                <p>Professionele rijlessen met persoonlijke begeleiding en bewezen resultaten</p>
-                
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="stat-icon"></div>
-                        <div class="stat-text">45+ jaar ervaring</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="stat-icon"></div>
-                        <div class="stat-text">68% slagingspercentage 1e keer</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="stat-icon"></div>
-                        <div class="stat-text">9.5 beoordeling</div>
-                    </div>
+        <div class="hero-left">
+            <div class="hero-badge">Hoogste slagingspercentage regio Amersfoort</div>
+            <h1>Jouw rijbewijs <span>begint hier.</span></h1>
+            <p class="hero-sub">Al 45+ jaar de rijschool waar Bunschoten op vertrouwt. Persoonlijk, professioneel en met bewezen resultaten.</p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary">Start je rijopleiding →</a>
+                <a href="#diensten" class="btn-ghost">Bekijk opleidingen</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-block">
+                    <div class="stat-number">45+</div>
+                    <div class="stat-label">Jaar ervaring</div>
                 </div>
-
-                <div class="cta-group">
-                    <a href="#contact" class="cta-btn">Start vandaag</a>
-                    <a href="#diensten" class="cta-btn cta-btn-outline">Bekijk diensten</a>
+                <div class="stat-block">
+                    <div class="stat-number">68%</div>
+                    <div class="stat-label">Slaagt 1e keer</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-number">9.5</div>
+                    <div class="stat-label">Beoordeling</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right">
+            <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0280-2.webp" alt="Rijschool Vermeer — Rijles in actie">
+            <div class="floating-review">
+                <div class="floating-score">9.5</div>
+                <div class="floating-text">
+                    <div class="floating-stars">★★★★★</div>
+                    <strong>Uitstekend beoordeeld</strong>
+                    <span>Gebaseerd op 200+ beoordelingen</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Diensten Section -->
-    <section class="services" id="diensten">
+    <!-- Diensten -->
+    <section class="diensten" id="diensten">
         <div class="container">
-            <div class="section-header slide-up">
-                <span class="section-tag">Onze Opleidingen</span>
-                <h2 class="section-title">Voor ieder doel de juiste opleiding</h2>
-                <p class="section-subtitle">Van personenauto tot vrachtwagen — wij begeleiden je naar succes</p>
-            </div>
+            <div class="section-label reveal">Onze opleidingen</div>
+            <h2 class="section-heading reveal">Voor elk rijbewijs <br>de juiste opleiding.</h2>
+            <p class="section-desc reveal">Van personenauto tot vrachtwagen — Rijschool Vermeer begeleidt je van eerste les tot geslaagd examen.</p>
 
-            <div class="services-grid">
-                <div class="service-card slide-up">
-                    <div class="service-image">
-                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0567.webp" alt="Auto rijlessen" loading="lazy">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 17h14v-5H5v5zM19 9H5V7c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v2z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="service-body">
-                        <h3>Rijbewijs Auto (B)</h3>
-                        <p>Professionele rijlessen voor je rijbewijs B. Leer rijden in een moderne leswagen met ervaren instructeurs.</p>
+            <div class="diensten-grid">
+                <div class="dienst-card reveal reveal-delay-1">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0567.webp" alt="Auto rijlessen" loading="lazy">
+                    <div class="dienst-overlay">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/car_bl.svg" alt="" class="dienst-icon">
+                        <h3>Rijbewijs B</h3>
+                        <p>Autorijlessen met persoonlijke begeleiding in een moderne leswagen.</p>
                     </div>
                 </div>
-
-                <div class="service-card slide-up">
-                    <div class="service-image">
-                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0862.webp" alt="Vrachtwagen rijlessen" loading="lazy">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="1" y="7" width="18" height="10" rx="2"/>
-                                <path d="M19 12h4v5h-4"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="service-body">
-                        <h3>Rijbewijs Vrachtwagen (C/CE)</h3>
-                        <p>Word professioneel vrachtwagenchauffeur. Complete opleiding voor rijbewijs C en CE met vakbekwame trainers.</p>
+                <div class="dienst-card reveal reveal-delay-2">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0862.webp" alt="Vrachtwagen rijlessen" loading="lazy">
+                    <div class="dienst-overlay">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/truck_bl.svg" alt="" class="dienst-icon">
+                        <h3>Vrachtwagen C/CE</h3>
+                        <p>Complete opleiding voor je vrachtwagenrijbewijs door ervaren trainers.</p>
                     </div>
                 </div>
-
-                <div class="service-card slide-up">
-                    <div class="service-image">
-                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0694.webp" alt="Code 95" loading="lazy">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <path d="M9 9h6M9 12h6M9 15h6"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="service-body">
-                        <h3>Code 95 Training</h3>
-                        <p>Verplichte nascholing voor beroepschauffeurs. Blijf op de hoogte van de laatste ontwikkelingen.</p>
+                <div class="dienst-card reveal reveal-delay-3">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0694.webp" alt="Code 95 nascholing" loading="lazy">
+                    <div class="dienst-overlay">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/code95_bl.svg" alt="" class="dienst-icon">
+                        <h3>Code 95</h3>
+                        <p>Verplichte nascholing voor beroepschauffeurs. Altijd up-to-date.</p>
                     </div>
                 </div>
-
-                <div class="service-card slide-up">
-                    <div class="service-image">
-                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0280-2.webp" alt="Theorie cursus" loading="lazy">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="service-body">
-                        <h3>Theorie Cursus</h3>
-                        <p>Bereid je optimaal voor op het theorie-examen. Persoonlijke begeleiding en oefenmateriaal.</p>
+                <div class="dienst-card reveal">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9799.webp" alt="Theorie cursus" loading="lazy">
+                    <div class="dienst-overlay">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/book_bl.svg" alt="" class="dienst-icon">
+                        <h3>Theorie</h3>
+                        <p>2-daagse theoriecursus in samenwerking met Theoriecentrum Amersfoort.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Waarom Vermeer Section -->
-    <section class="why-us">
+    <!-- Waarom Vermeer — Bento Grid -->
+    <section class="waarom" id="waarom">
         <div class="container">
-            <div class="why-grid">
-                <div class="why-image slide-left">
-                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9646.webp" alt="Rijschool Vermeer instructeur" loading="lazy">
-                    <div class="why-badge">CBR Erkend</div>
+            <div class="section-label reveal" style="color: var(--yellow);">Waarom Vermeer</div>
+            <h2 class="section-heading reveal">Niet zomaar een rijschool.</h2>
+            <p class="section-desc reveal">Wij combineren 45 jaar ervaring met een persoonlijke aanpak. Geen nummertje, maar echte begeleiding.</p>
+
+            <div class="bento-grid">
+                <div class="bento-card featured reveal">
+                    <div class="bento-img">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9646.webp" alt="Instructeur" loading="lazy">
+                    </div>
+                    <div class="bento-text">
+                        <div class="bento-number">45+</div>
+                        <h3>Jaar ervaring</h3>
+                        <p>Al meer dan 45 jaar helpen wij inwoners van Bunschoten, Amersfoort, Nijkerk en Baarn hun rijbewijs te halen. Dat is geen toeval — dat is vakmanschap.</p>
+                    </div>
                 </div>
-                <div class="why-content slide-right">
-                    <h2>Waarom kiezen voor Rijschool Vermeer?</h2>
-                    <ul class="why-list">
-                        <li class="why-item">
-                            <div class="why-icon">✓</div>
-                            <div class="why-text">
-                                <h4>45+ jaar ervaring</h4>
-                                <p>Al meer dan 45 jaar helpen wij mensen hun rijbewijs te halen met vakmanschap en geduld</p>
-                            </div>
-                        </li>
-                        <li class="why-item">
-                            <div class="why-icon">✓</div>
-                            <div class="why-text">
-                                <h4>68% slagingspercentage eerste keer</h4>
-                                <p>Onze leerlingen scoren ver boven het landelijk gemiddelde dankzij goede voorbereiding</p>
-                            </div>
-                        </li>
-                        <li class="why-item">
-                            <div class="why-icon">✓</div>
-                            <div class="why-text">
-                                <h4>Persoonlijke begeleiding</h4>
-                                <p>Elke leerling is uniek. Wij passen ons tempo en methode aan op jouw leerstijl</p>
-                            </div>
-                        </li>
-                        <li class="why-item">
-                            <div class="why-icon">✓</div>
-                            <div class="why-text">
-                                <h4>CBR erkend & BOVAG aangesloten</h4>
-                                <p>Kwaliteit gegarandeerd door officiële erkenningen en certificeringen</p>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="bento-card reveal">
+                    <div class="bento-number">68%</div>
+                    <h3>Slaagt in één keer</h3>
+                    <p>Ons slagingspercentage bij het eerste examen ligt ver boven het landelijk gemiddelde. Check het op cbr.nl.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
+                    <h3>Persoonlijke aanpak</h3>
+                    <p>Elke leerling is anders. Wij passen ons tempo en methode aan op jouw leerstijl en behoeften.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🚗</div>
+                    <h3>Moderne leswagens</h3>
+                    <p>Leer rijden in comfortabele, goed onderhouden voertuigen met de nieuwste veiligheidsfeatures.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">📋</div>
+                    <h3>CBR erkend</h3>
+                    <p>Volledig erkend door het CBR. Kwaliteit en professionaliteit zijn bij ons gegarandeerd.</p>
+                </div>
+                <div class="bento-card reveal">
+                    <div style="font-size: 2.5rem; margin-bottom: 15px;">🗺️</div>
+                    <h3>Regio dekkend</h3>
+                    <p>Actief in Bunschoten, Amersfoort, Nijkerk, Baarn en omstreken. Altijd dichtbij.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="gallery">
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
         <div class="container">
-            <div class="section-header slide-up">
-                <span class="section-tag">Impressie</span>
-                <h2 class="section-title">Onze leerlingen aan het werk</h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item slide-up">
-                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9646.webp" alt="Leerling 1" loading="lazy">
+            <div class="section-label reveal">Impressie</div>
+            <h2 class="section-heading reveal">Leerlingen in actie.</h2>
+            <p class="section-desc reveal">Een kijkje achter het stuur bij Rijschool Vermeer.</p>
+
+            <div class="gallery-masonry">
+                <div class="g-item reveal">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9771.webp" alt="Rijles" loading="lazy">
                 </div>
-                <div class="gallery-item slide-up">
-                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9771.webp" alt="Leerling 2" loading="lazy">
+                <div class="g-item reveal reveal-delay-1">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0567.webp" alt="Autorijles" loading="lazy">
                 </div>
-                <div class="gallery-item slide-up">
-                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9799.webp" alt="Leerling 3" loading="lazy">
+                <div class="g-item reveal reveal-delay-2">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0862.webp" alt="Vrachtwagenrijles" loading="lazy">
+                </div>
+                <div class="g-item reveal reveal-delay-3">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A9799.webp" alt="Geslaagd" loading="lazy">
+                </div>
+                <div class="g-item reveal">
+                    <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0694.webp" alt="Les" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section class="reviews">
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
         <div class="container">
-            <div class="section-header slide-up">
-                <span class="section-tag">Tevreden klanten</span>
-                <h2 class="section-title">Wat onze leerlingen zeggen</h2>
-            </div>
-            <div class="reviews-grid">
-                <div class="review-card slide-up">
+            <div class="section-label reveal">Ervaringen</div>
+            <h2 class="section-heading reveal">Wat leerlingen zeggen.</h2>
+            <p class="section-desc reveal">Meer dan 200 positieve beoordelingen van tevreden leerlingen.</p>
+
+            <div class="reviews-row">
+                <div class="review-card reveal">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Super rijschool! In één keer geslaagd dankzij de rustige en duidelijke uitleg. Wim is een top instructeur!"</p>
-                    <p class="reviewer-name">— Lisa de Jong</p>
+                    <p class="review-text">Super fijne rijschool! Wim legt alles rustig en duidelijk uit. In één keer geslaagd, mede dankzij de goede voorbereiding.</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">L</div>
+                        <div>
+                            <div class="reviewer-name">Lisa de Jong</div>
+                            <div class="reviewer-detail">Rijbewijs B — geslaagd 1e keer</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="review-card slide-up">
+                <div class="review-card reveal reveal-delay-1">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Professionele begeleiding en moderne leswagens. Echt een aanrader voor iedereen die zijn rijbewijs wil halen."</p>
-                    <p class="reviewer-name">— Tim van Dijk</p>
+                    <p class="review-text">Mijn vrachtwagenrijbewijs gehaald bij Vermeer. Professionele instructeurs die je echt leren rijden. Absolute aanrader!</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">M</div>
+                        <div>
+                            <div class="reviewer-name">Mark Bakker</div>
+                            <div class="reviewer-detail">Rijbewijs CE — geslaagd</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="review-card slide-up">
+                <div class="review-card reveal reveal-delay-2">
                     <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Mijn vrachtwagenrijbewijs gehaald bij Vermeer. Goede instructeurs die je écht leren rijden. Perfect!"</p>
-                    <p class="reviewer-name">— Mark Bakker</p>
+                    <p class="review-text">Na een slechte ervaring bij een andere rijschool ben ik overgestapt naar Vermeer. Wat een verschil! Persoonlijk, geduldig en kundig.</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">S</div>
+                        <div>
+                            <div class="reviewer-name">Sophie van Dam</div>
+                            <div class="reviewer-detail">Rijbewijs B — geslaagd 1e keer</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="contact-content">
-                <div class="section-header slide-up">
-                    <span class="section-tag">Start vandaag</span>
-                    <h2 class="section-title">Klaar om te beginnen?</h2>
-                    <p class="section-subtitle">Neem contact met ons op en start met je rijopleiding</p>
-                </div>
+            <div class="contact-card reveal">
+                <div class="contact-info">
+                    <h2>Klaar om te starten?</h2>
+                    <p>Neem contact op en begin vandaag nog met je rijopleiding bij Rijschool Vermeer.</p>
 
-                <div class="contact-grid">
-                    <div class="contact-item slide-up">
-                        <div class="contact-icon">📍</div>
-                        <h3>Adres</h3>
-                        <p>De Hooistreep 26<br>3751 LW Bunschoten-Spakenburg</p>
+                    <div class="contact-item">
+                        <span class="contact-emoji">📍</span>
+                        <div class="contact-detail">
+                            <strong>Adres</strong>
+                            <span>De Hooistreep 26, 3751 LW Bunschoten-Spakenburg</span>
+                        </div>
                     </div>
-                    <div class="contact-item slide-up">
-                        <div class="contact-icon">📞</div>
-                        <h3>Telefoon</h3>
-                        <p>033 299 00 63<br>06 22 48 24 06</p>
+                    <div class="contact-item">
+                        <span class="contact-emoji">📞</span>
+                        <div class="contact-detail">
+                            <strong>Telefoon</strong>
+                            <a href="tel:0332990063">033 299 00 63</a>
+                        </div>
                     </div>
-                    <div class="contact-item slide-up">
-                        <div class="contact-icon">✉️</div>
-                        <h3>Email</h3>
-                        <p>wim@rijschoolvermeer.nl</p>
+                    <div class="contact-item">
+                        <span class="contact-emoji">📱</span>
+                        <div class="contact-detail">
+                            <strong>Mobiel / WhatsApp</strong>
+                            <a href="tel:0622482406">06 22 48 24 06</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-emoji">✉️</span>
+                        <div class="contact-detail">
+                            <strong>Email</strong>
+                            <a href="mailto:wim@rijschoolvermeer.nl">wim@rijschoolvermeer.nl</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-btns">
+                        <a href="https://wa.me/31622482406" class="btn-whatsapp">💬 WhatsApp</a>
+                        <a href="tel:0332990063" class="btn-call">📞 Bel direct</a>
                     </div>
                 </div>
-
-                <div class="contact-cta slide-up">
-                    <a href="tel:0332990063" class="cta-btn">Bel nu</a>
-                    <a href="https://wa.me/31622482406" class="cta-btn whatsapp-btn">WhatsApp</a>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps?q=De+Hooistreep+26,+3751+LW+Bunschoten-Spakenburg&output=embed" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -858,29 +698,23 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Rijschool Vermeer. Alle rechten voorbehouden.</p>
-        <p>Website ontworpen door <a href="#">The Business Booster</a></p>
+        <p>Website ontworpen door <a href="https://thebusinessbooster.nl">The Business Booster</a></p>
     </footer>
 
     <script>
-        // Intersection Observer voor scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.slide-up, .slide-left, .slide-right').forEach(el => {
-            observer.observe(el);
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
         });
+
+        // Reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 
 </body>
