@@ -3,423 +3,664 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant De Mandemaaker | Professionele dienstverlening</title>
-    <meta name="description" content="Michelin en Gault Millau erkend restaurant aan de historische museumhaven van Spakenburg. Gespecialiseerd in verse vis en zeevruchten.">
-    
-    <!-- Google Fonts -->
+    <title>Restaurant De Mandemaaker - Culinaire Beleving in Spakenburg</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* Colors - these will be customized per business */
-            --primary-color: #064e3b;
-            --secondary-color: #d97706;
-            --accent-color: #fbbf24;
-            --dark: #1a1a1a;
-            --light: #ffffff;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-600: #4b5563;
-            --gray-800: #1f2937;
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            --gradient-overlay: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --deep-green: #1a3a2a;
+            --darker-green: #0f2319;
+            --gold: #c9a84c;
+            --gold-light: #d4b662;
+            --cream: #f5f0e8;
+            --cream-dark: #e8dfd0;
+            --text-dark: #2d2d2d;
+            --text-gray: #6b6b6b;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
             overflow-x: hidden;
         }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient-primary);
-            overflow: hidden;
-        }
-        
-        .hero::before {
+
+        /* Linen texture overlay */
+        body::before {
             content: '';
-            position: absolute;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.02) 3px),
+                repeating-linear-gradient(90deg, rgba(0,0,0,0.02) 0px, transparent 1px, transparent 2px, rgba(0,0,0,0.02) 3px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            padding: 1.5rem 0;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+        .navbar.scrolled {
+            background: rgba(26, 58, 42, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 60px;
+        }
+
+        .navbar.scrolled .logo {
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--deep-green);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--cream);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .reserve-button {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--deep-green);
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+        }
+
+        .reserve-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(201, 168, 76, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--deep-green);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.demandemaaker.nl/wp-content/uploads/2019/01/Mandemaaker-64-1-e1548856975983-1500x630.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 58, 42, 0.85) 0%, rgba(15, 35, 25, 0.9) 100%);
+        }
+
         .hero-content {
             position: relative;
-            text-align: center;
-            color: var(--light);
-            padding: 2rem;
-            max-width: 1200px;
+            z-index: 2;
+            max-width: 1300px;
             margin: 0 auto;
-            z-index: 1;
+            padding: 0 3rem;
+            text-align: center;
         }
-        
-        .hero-logo {
-            max-width: 200px;
-            margin-bottom: 2rem;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-            animation: fadeInDown 1s ease-out;
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.15);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.8s ease;
         }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(3rem, 10vw, 6.5rem);
             font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out 0.2s both;
+            color: var(--cream);
+            animation: fadeInUp 0.8s ease 0.2s backwards;
         }
-        
+
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gold);
+            font-style: italic;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--cream-dark);
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.8s backwards;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--deep-green);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(201, 168, 76, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cream);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid var(--cream);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream);
+            color: var(--deep-green);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.4s both;
+
+        /* Badges Section */
+        .badges-section {
+            position: relative;
+            z-index: 3;
+            margin-top: -60px;
+            padding: 0 3rem;
         }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--light);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 50px;
+
+        .badges-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge-card {
+            background: white;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 1.5rem 2.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .badge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-name {
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: fadeInUp 1s ease-out 0.6s both;
+            color: var(--deep-green);
         }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        /* Section Styling */
-        section {
-            padding: 5rem 2rem;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray-600);
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
+
         /* About Section */
         .about {
-            background: var(--gray-50);
+            padding: 8rem 3rem;
+            background: white;
         }
-        
-        .about-content {
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
         }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
-        }
-        
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-        }
-        
+
         .about-image {
             position: relative;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
-        
+
         .about-image img {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            display: block;
         }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
+
+        .section-label {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
         }
-        
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--deep-green);
         }
-        
-        .service-card {
-            background: var(--light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+
+        .about-text p {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-location {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--cream);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+        }
+
+        .about-location p {
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Menu Preview */
+        .menu-preview {
+            padding: 8rem 3rem;
+            background: var(--deep-green);
             position: relative;
-            overflow: hidden;
         }
-        
-        .service-card::before {
+
+        .menu-preview::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.01) 0px, transparent 1px, transparent 2px, rgba(255,255,255,0.01) 3px);
+            pointer-events: none;
         }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 5rem;
         }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--light);
+
+        .menu-header .section-label {
+            color: var(--gold);
         }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
+
+        .menu-header .section-title {
+            color: var(--cream);
         }
-        
-        .service-card p {
-            color: var(--gray-600);
-            line-height: 1.7;
+
+        .menu-header p {
+            font-size: 1.15rem;
+            color: var(--cream-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
         }
-        
-        /* Contact Section */
-        .contact {
-            background: var(--gradient-primary);
-            color: var(--light);
-        }
-        
-        .contact-content {
+
+        .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
-        
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
         }
-        
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--gold);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+
+        .menu-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--cream);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .menu-item p {
+            color: var(--cream-dark);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .menu-cta {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Reservation Section */
+        .reservation {
+            padding: 8rem 3rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .reservation::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .reservation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reservation h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--deep-green);
+        }
+
+        .reservation p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--darker-green);
+            line-height: 1.6;
+        }
+
+        .opening-hours {
+            margin: 2rem 0 3rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--darker-green);
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
         .contact-item {
             display: flex;
-            align-items: start;
-            margin-bottom: 2rem;
-            background: rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            margin-right: 1.5rem;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .contact-details h4 {
+            gap: 0.8rem;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
-        
-        .contact-details p {
-            font-size: 1.2rem;
+            color: var(--deep-green);
             font-weight: 600;
         }
-        
-        .contact-details a {
-            color: var(--light);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
+
+        .contact-icon {
+            font-size: 1.5rem;
         }
-        
-        .contact-details a:hover {
-            opacity: 0.8;
-        }
-        
-        .map-container {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            height: 100%;
-            min-height: 400px;
-            background: rgba(255,255,255,0.1);
+
+        .reservation-buttons {
             display: flex;
-            align-items: center;
+            gap: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
-        
-        .map-placeholder {
-            text-align: center;
-            padding: 2rem;
+
+        .btn-dark {
+            background: var(--deep-green);
+            color: var(--cream);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         }
-        
-        .map-placeholder p {
-            opacity: 0.8;
-            margin-bottom: 1rem;
+
+        .btn-dark:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
         }
-        
+
         /* Footer */
         footer {
-            background: var(--gray-800);
-            color: var(--light);
-            text-align: center;
-            padding: 3rem 2rem;
+            background: var(--darker-green);
+            padding: 4rem 3rem 2rem;
+            color: var(--cream);
         }
-        
-        footer p {
-            opacity: 0.8;
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
         }
-        
-        .footer-links {
-            margin-top: 1.5rem;
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
         }
-        
-        .footer-links a {
-            color: var(--light);
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--cream-dark);
             text-decoration: none;
-            margin: 0 1rem;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            line-height: 2;
+            display: block;
+            font-size: 0.95rem;
         }
-        
-        .footer-links a:hover {
-            opacity: 1;
+
+        .footer-section a:hover {
+            color: var(--gold);
         }
-        
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(245, 240, 232, 0.1);
+            text-align: center;
+            color: var(--cream-dark);
+            font-size: 0.9rem;
+        }
+
+        .footer-credit {
+            margin-top: 1rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .about-content,
-            .contact-content {
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .menu-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            section {
-                padding: 3rem 1.5rem;
-            }
-            
-            .hero {
-                min-height: 80vh;
+
+            .badges-section {
+                margin-top: -40px;
             }
         }
-        
-        /* Scroll animations */
+
+        /* Scroll Animation */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
@@ -427,142 +668,197 @@
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <img src="https://www.demandemaaker.nl/wp-content/uploads/2025/02/logo-website-.png" alt="De Mandemaaker" class="logo">
+            <ul class="nav-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#over">Over Ons</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:0332980255" class="reserve-button">Reserveren</a>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            
-            <h1>Restaurant De Mandemaaker</h1>
-            <p>Michelin en Gault Millau erkend restaurant aan de historische museumhaven van Spakenburg. Gespecialiseerd in verse vis en zeevruchten.</p>
-            <a href="#contact" class="cta-button">Neem Contact Op</a>
+            <div class="hero-badge">MICHELIN · GAULT MILLAU · LEKKER</div>
+            <h1>De Mandemaaker</h1>
+            <p class="hero-tagline">Heerlijk eten & Spakenburgse gastvrijheid</p>
+            <p>Een culinaire beleving in het hart van Spakenburg. Ons restaurant ligt vlak bij de authentieke vissershaven en biedt u een verfijnde ervaring met lokale invloeden.</p>
+            <div class="hero-buttons">
+                <a href="#reserveren" class="btn-primary">Reserveer Tafel</a>
+                <a href="#menu" class="btn-secondary">Bekijk Menu</a>
+            </div>
         </div>
     </section>
-    
+
+    <!-- Badges -->
+    <section class="badges-section">
+        <div class="badges-container">
+            <div class="badge-card fade-in">
+                <div class="badge-icon">⭐</div>
+                <div class="badge-name">MICHELIN</div>
+            </div>
+            <div class="badge-card fade-in">
+                <div class="badge-icon">🏆</div>
+                <div class="badge-name">Gault Millau</div>
+            </div>
+            <div class="badge-card fade-in">
+                <div class="badge-icon">🍴</div>
+                <div class="badge-name">Euro-Toques</div>
+            </div>
+            <div class="badge-card fade-in">
+                <div class="badge-icon">✨</div>
+                <div class="badge-name">Lekker</div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <h2 class="section-title fade-in">Over Ons</h2>
-            <p class="section-subtitle fade-in">Waar traditie en moderniteit samenkomen</p>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    
-                    <h3>Culinair genieten aan de haven</h3>
-                    <p>Restaurant De Mandemaaker combineert eigentijdse gastronomie met de rijke visserstraditie van Spakenburg. Onze locatie aan de museumhaven biedt een unieke sfeer en adembenemend uitzicht.</p>
-                    <p>Chef-kok en zijn team werken uitsluitend met dagverse producten van de hoogste kwaliteit. Onze specialiteit? Verse vis en zeevruchten, vakkundig bereid met moderne technieken en respect voor traditie.</p>
-                    <p>Onze toewijding aan culinaire excellence is erkend door zowel Michelin als Gault Millau. Maar het belangrijkste is dat onze gasten keer op keer met een glimlach de deur uitgaan.</p>
+    <section class="about" id="over">
+        <div class="about-container">
+            <div class="about-text fade-in">
+                <div class="section-label">Over Ons</div>
+                <h2 class="section-title">Culinaire Traditie in Spakenburg</h2>
+                <p>
+                    Ons restaurant ligt in het hart van Nederland; in het centrum van Spakenburg, vlak bij de oude vissershaven en de authentieke scheepshelling.
+                </p>
+                <p>
+                    Wij ontvangen u graag samen met ons team voor een culinaire beleving die traditionele Spakenburgse gastvrijheid combineert met verfijnde, moderne keuken.
+                </p>
+                <div class="about-location">
+                    <p><strong>📍 Locatie</strong></p>
+                    <p>Op 10 minuten van Amersfoort en 25 minuten van Amsterdam</p>
                 </div>
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="About Us">
-                </div>
+            </div>
+            <div class="about-image fade-in">
+                <img src="https://www.demandemaaker.nl/wp-content/uploads/2025/03/1Y1A6823b-1500x630.jpg" alt="Restaurant interieur">
             </div>
         </div>
     </section>
-    
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title fade-in">Onze Diensten</h2>
-            <p class="section-subtitle fade-in">Een culinaire ervaring om nooit te vergeten</p>
-            <div class="services-grid">
-                
-                <div class="service-card fade-in">
-                    <div class="service-icon">🔧</div>
-                    <h3>Verse Vis & Zeevruchten</h3>
-                    <p>Dagverse vis en zeevruchten van de beste kwaliteit, vakkundig bereid.</p>
+
+    <!-- Menu Preview -->
+    <section class="menu-preview" id="menu">
+        <div class="menu-container">
+            <div class="menu-header fade-in">
+                <div class="section-label">Ons Menu</div>
+                <h2 class="section-title">Culinaire Verfijning</h2>
+                <p>Ontdek onze selectie van seizoensgebonden gerechten, bereid met de beste lokale ingrediënten en een moderne twist.</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item fade-in">
+                    <div class="menu-item-image">
+                        <img src="https://www.demandemaaker.nl/wp-content/uploads/2025/03/1Y1A6786b-1500x630.jpg" alt="Gerecht">
+                    </div>
+                    <h3>Signature Gerechten</h3>
+                    <p>Onze chef's selectie van verfijnde creaties, waarbij lokale smaken centraal staan en elke hap een verhaal vertelt.</p>
                 </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">⚡</div>
-                    <h3>Eigentijdse Keuken</h3>
-                    <p>Moderne gerechten met respect voor traditie en verrassende smaken.</p>
+                <div class="menu-item fade-in">
+                    <div class="menu-item-image">
+                        <img src="https://www.demandemaaker.nl/wp-content/uploads/2025/03/Sander-en-Anne_b-1500x630.jpg" alt="Chef's team">
+                    </div>
+                    <h3>Chef's Experience</h3>
+                    <p>Laat u verrassen door onze chef met een unieke culinaire reis door de seizoenen.</p>
                 </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🎯</div>
-                    <h3>Michelin Erkend</h3>
-                    <p>Erkend in Michelin Guide en Gault Millau voor uitmuntende kwaliteit.</p>
+                <div class="menu-item fade-in">
+                    <div class="menu-item-image">
+                        <img src="https://www.demandemaaker.nl/wp-content/uploads/2020/03/4B4B9604-1500x630.jpg" alt="Wijn selectie">
+                    </div>
+                    <h3>Wijn Arrangement</h3>
+                    <p>Zorgvuldig geselecteerde wijnen die perfect aansluiten bij elk gerecht voor de ultieme smaakbeleving.</p>
                 </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">💎</div>
-                    <h3>Unieke Locatie</h3>
-                    <p>Dineren met uitzicht op de historische museumhaven van Spakenburg.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🚀</div>
-                    <h3>Lunch & Diner</h3>
-                    <p>Open di vanaf 17:00, wo-za vanaf 12:00. Reserveren aanbevolen.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🏆</div>
-                    <h3>Groepen & Events</h3>
-                    <p>Speciale arrangementen voor groepen en bijzondere gelegenheden.</p>
-                </div>
+            </div>
+            <div class="menu-cta fade-in">
+                <a href="#reserveren" class="btn-primary">Reserveer Nu</a>
             </div>
         </div>
     </section>
-    
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Neem Contact Op</h2>
-            <p class="section-subtitle">We staan voor u klaar. Neem vrijblijvend contact op!</p>
-            <div class="contact-content">
-                <div class="contact-info">
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h4>Adres</h4>
-                            <p>Kerkstraat 103, 3751 AT Spakenburg</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div class="contact-details">
-                            <h4>Telefoon</h4>
-                            <p><a href="tel:0332980255">033 298 02 55</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p><a href="mailto:info@demandemaaker.nl">info@demandemaaker.nl</a></p>
-                        </div>
-                    </div>
+
+    <!-- Reservation CTA -->
+    <section class="reservation" id="reserveren">
+        <div class="reservation-container">
+            <h2>Reserveer Uw Tafel</h2>
+            <p>Wij ontvangen u graag voor een onvergetelijke culinaire ervaring.</p>
+            <div class="opening-hours">
+                <p><strong>Openingstijden</strong></p>
+                <p>Woensdag t/m zaterdag vanaf 12:00 uur</p>
+                <p>Dinsdag vanaf 17:00 uur</p>
+                <p>Zondag en maandag gesloten</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>033 298 02 55</span>
                 </div>
-                <div class="map-container">
-                    
-                    <iframe 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        style="border:0; border-radius: 20px;" 
-                        src="https://www.google.com/maps?q=Kerkstraat+103,+3751+AT+Spakenburg&output=embed"
-                        allowfullscreen>
-                    </iframe>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>info@demandemaaker.nl</span>
                 </div>
+            </div>
+            <div class="reservation-buttons">
+                <a href="tel:0332980255" class="btn-dark">Bel Direct</a>
+                <a href="mailto:info@demandemaaker.nl" class="btn-secondary">Email Ons</a>
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Restaurant De Mandemaaker. Alle rechten voorbehouden.</p>
-            <div class="footer-links">
-                
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>De Mandemaaker</h3>
+                <p>Kerkstraat 103<br>3751 BC Spakenburg</p>
+                <p>Tel: 033 298 02 55</p>
+                <p>info@demandemaaker.nl</p>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
-                Website ontworpen door <a href="https://thebusinessbooster.nl" style="color: var(--accent-color);">The Business Booster</a>
-            </p>
+            <div class="footer-section">
+                <h3>Restaurant</h3>
+                <a href="#menu">Menu</a>
+                <a href="#over">Over Ons</a>
+                <a href="#reserveren">Reserveren</a>
+                <a href="#">Privé Dining</a>
+            </div>
+            <div class="footer-section">
+                <h3>Openingstijden</h3>
+                <p>Dinsdag: 17:00 - 22:00</p>
+                <p>Woensdag - Zaterdag: 12:00 - 22:00</p>
+                <p>Zondag & Maandag: Gesloten</p>
+            </div>
+            <div class="footer-section">
+                <h3>Volg Ons</h3>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Michelin Guide</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Restaurant De Mandemaaker. Alle rechten voorbehouden.</p>
+            <p class="footer-credit">Website ontworpen door The Business Booster</p>
         </div>
     </footer>
-    
+
     <script>
-        // Scroll animations
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -80px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -570,18 +866,9 @@
                 }
             });
         }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
         });
     </script>
 </body>

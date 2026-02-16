@@ -3,112 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rijschool Vermeer | Professionele dienstverlening</title>
-    <meta name="description" content="Al meer dan 45 jaar dé rijschool in Bunschoten, Amersfoort, Nijkerk en Baarn. Van auto tot vrachtwagen - wij leiden u op tot een veilige chauffeur.">
-    
-    <!-- Google Fonts -->
+    <title>Rijschool Vermeer - Haal Je Rijbewijs met Succes | 45+ Jaar Ervaring</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* Colors - these will be customized per business */
-            --primary-color: #16a34a;
-            --secondary-color: #0ea5e9;
-            --accent-color: #22d3ee;
-            --dark: #1a1a1a;
-            --light: #ffffff;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-600: #4b5563;
-            --gray-800: #1f2937;
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            --gradient-overlay: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --green-light: #4ade80;
+            --dark-gray: #1f2937;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--white);
+            color: var(--dark-gray);
             overflow-x: hidden;
         }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--gradient-primary);
-            overflow: hidden;
+
+        /* Gradient Mesh Background */
+        .gradient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 20% 30%, rgba(34, 197, 94, 0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 70%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(74, 222, 128, 0.05) 0px, transparent 50%);
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1.2rem 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 0;
         }
-        
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: var(--light);
-            padding: 2rem;
-            max-width: 1200px;
+
+        .nav-container {
+            max-width: 1300px;
             margin: 0 auto;
-            z-index: 1;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .hero-logo {
-            max-width: 200px;
+
+        .logo {
+            height: 55px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            color: white;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(74, 222, 128, 0.1) 100%);
+            border: 2px solid var(--green);
+            color: var(--green);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
             margin-bottom: 2rem;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
-            animation: fadeInDown 1s ease-out;
+            animation: fadeInUp 0.6s ease;
         }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
             font-weight: 900;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out 0.2s both;
+            color: var(--dark-gray);
+            animation: fadeInUp 0.6s ease 0.1s backwards;
         }
-        
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease 0.2s backwards;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.3s backwards;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.4s backwards;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            color: white;
+            padding: 1.1rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark-gray);
+            padding: 1.1rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: 2px solid var(--dark-gray);
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 0.8s ease 0.3s backwards;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+            transform: rotate(-2deg);
+            transition: transform 0.4s;
+        }
+
+        .hero-image:hover img {
+            transform: rotate(0deg);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -119,307 +270,490 @@
                 transform: translateY(0);
             }
         }
-        
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.4s both;
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--light);
-            color: var(--primary-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        /* Section Styling */
-        section {
+
+        /* Stats Section */
+        .stats {
             padding: 5rem 2rem;
+            background: white;
         }
-        
-        .container {
-            max-width: 1200px;
+
+        .stats-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(74, 222, 128, 0.05) 100%);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--light-gray);
+        }
+
+        .services-container {
+            max-width: 1300px;
             margin: 0 auto;
         }
-        
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+
+        .section-header {
             text-align: center;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray-600);
-            font-size: 1.2rem;
             margin-bottom: 4rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
         }
-        
-        /* About Section */
-        .about {
-            background: var(--gray-50);
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(74, 222, 128, 0.1) 100%);
+            color: var(--green);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
         }
-        
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
         }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
+
+        .section-subtitle {
+            font-size: 1.15rem;
+            color: var(--gray);
+            max-width: 650px;
+            margin: 0 auto;
         }
-        
-        .about-text p {
-            font-size: 1.1rem;
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Services Grid */
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(34, 197, 94, 0.15);
+            border-color: var(--green);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon img {
+            width: 45px;
+            height: 45px;
+            filter: brightness(0) invert(1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Packages Section */
+        .packages {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .packages-container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
-        
-        .service-card {
-            background: var(--light);
+
+        .package-card {
+            background: white;
+            border: 3px solid var(--light-gray);
+            border-radius: 24px;
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            text-align: center;
+            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-        
-        .service-card::before {
+
+        .package-card.featured {
+            border-color: var(--green);
+            transform: scale(1.05);
+        }
+
+        .package-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: var(--gradient-primary);
+            height: 5px;
+            background: linear-gradient(90deg, var(--green) 0%, var(--green-light) 100%);
             transform: scaleX(0);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s;
         }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        
-        .service-card:hover::before {
+
+        .package-card:hover::before {
             transform: scaleX(1);
         }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+
+        .package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(34, 197, 94, 0.2);
+            border-color: var(--green);
+        }
+
+        .package-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
             margin-bottom: 1.5rem;
-            color: var(--light);
         }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--gray-800);
-        }
-        
-        .service-card p {
-            color: var(--gray-600);
-            line-height: 1.7;
-        }
-        
-        /* Contact Section */
-        .contact {
-            background: var(--gradient-primary);
-            color: var(--light);
-        }
-        
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-        
-        .contact-info h3 {
+
+        .package-card h3 {
             font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--dark-gray);
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .package-period {
+            color: var(--gray);
+            font-size: 0.9rem;
             margin-bottom: 2rem;
         }
-        
-        .contact-item {
-            display: flex;
-            align-items: start;
+
+        .package-features {
+            list-style: none;
             margin-bottom: 2rem;
-            background: rgba(255,255,255,0.1);
-            padding: 1.5rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            text-align: left;
         }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 12px;
+
+        .package-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light-gray);
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-right: 1.5rem;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            gap: 0.8rem;
+            color: var(--dark-gray);
         }
-        
-        .contact-details h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: var(--green);
+            font-weight: 900;
+            font-size: 1.2rem;
+        }
+
+        .package-cta {
+            width: 100%;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        .package-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+        }
+
+        /* Why Section */
+        .why {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+            color: white;
+        }
+
+        .why-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .why-header h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .why-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .why-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .why-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .why-item h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .why-item p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: var(--dark-gray);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
         }
-        
-        .contact-details p {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        
-        .contact-details a {
-            color: var(--light);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-        
-        .contact-details a:hover {
-            opacity: 0.8;
-        }
-        
-        .map-container {
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            height: 100%;
-            min-height: 400px;
-            background: rgba(255,255,255,0.1);
+
+        .cta-buttons {
             display: flex;
-            align-items: center;
+            gap: 1.5rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
-        
-        .map-placeholder {
-            text-align: center;
-            padding: 2rem;
+
+        .btn-white {
+            background: white;
+            color: var(--dark-gray);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.05rem;
+            transition: all 0.3s;
         }
-        
-        .map-placeholder p {
-            opacity: 0.8;
-            margin-bottom: 1rem;
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
         }
-        
+
         /* Footer */
         footer {
-            background: var(--gray-800);
-            color: var(--light);
-            text-align: center;
-            padding: 3rem 2rem;
+            background: var(--dark-gray);
+            padding: 4rem 2rem 2rem;
+            color: white;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        footer p {
-            opacity: 0.8;
+
+        .footer-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
         }
-        
-        .footer-links {
-            margin-top: 1.5rem;
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--green);
         }
-        
-        .footer-links a {
-            color: var(--light);
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            margin: 0 1rem;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            line-height: 2;
+            display: block;
         }
-        
-        .footer-links a:hover {
-            opacity: 1;
+
+        .footer-section a:hover {
+            color: var(--green);
         }
-        
+
+        .footer-bottom {
+            max-width: 1300px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .footer-credit {
+            margin-top: 1rem;
+            color: var(--green);
+            font-weight: 700;
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .about-content,
-            .contact-content {
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .packages-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            section {
-                padding: 3rem 1.5rem;
-            }
-            
-            .hero {
-                min-height: 80vh;
+
+            .package-card.featured {
+                transform: scale(1);
             }
         }
-        
-        /* Scroll animations */
+
+        /* Scroll Animation */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
@@ -427,161 +761,332 @@
     </style>
 </head>
 <body>
+    <div class="gradient-mesh"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/Z_LOGO_RV_FULLCOLOR_OP.svg" alt="Rijschool Vermeer" class="logo">
+            <ul class="nav-links">
+                <li><a href="#diensten">Diensten</a></li>
+                <li><a href="#pakketten">Pakketten</a></li>
+                <li><a href="#waarom">Waarom Vermeer</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#aanmelden" class="nav-cta">Aanmelden</a>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            
-            <h1>Rijschool Vermeer</h1>
-            <p>Al meer dan 45 jaar dé rijschool in Bunschoten, Amersfoort, Nijkerk en Baarn. Van auto tot vrachtwagen - wij leiden u op tot een veilige chauffeur.</p>
-            <a href="#contact" class="cta-button">Neem Contact Op</a>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <h2 class="section-title fade-in">Over Ons</h2>
-            <p class="section-subtitle fade-in">Leren rijden bij de beste</p>
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    
-                    <h3>45 jaar ervaring in rijopleidingen</h3>
-                    <p>Rijschool Vermeer staat sinds 1979 garant voor kwalitatieve rijopleidingen in de regio. Met meer dan vier decennia ervaring weten wij precies hoe we u kunnen helpen om een veilige en zelfverzekerde bestuurder te worden.</p>
-                    <p>Ons team van gediplomeerde en ervaren instructeurs biedt persoonlijke begeleiding, van theorie tot praktijkexamen. We rijden in moderne lesauto's die perfect zijn uitgerust voor uw opleiding.</p>
-                    <p>Of u nu uw auto-rijbewijs wilt halen, een vrachtwagenrijbewijs nodig heeft, of code 95 nascholing moet volgen - bij Rijschool Vermeer zit u goed!</p>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    ⭐ 68% Slagingspercentage 1e Keer!
                 </div>
-                <div class="about-image fade-in">
-                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80" alt="About Us">
+                <h1>
+                    Haal Je Rijbewijs met<br>
+                    <span class="highlight">Succes Gegarandeerd</span>
+                </h1>
+                <p class="hero-text">
+                    Jonge dynamische rijschool met 45+ jaar ervaring. Rijles in alle categorieën in Bunschoten, Amersfoort, Nijkerk en Baarn. Aantoonbaar hoog slagingspercentage!
+                </p>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Vaste Instructeur</span>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Gratis Praktijkboek</span>
+                    </div>
+                    <div class="hero-feature">
+                        <div class="feature-icon">✓</div>
+                        <span>Gespreid Betalen</span>
+                    </div>
                 </div>
+                <div class="hero-buttons">
+                    <a href="#aanmelden" class="btn-primary">Gratis Proefles</a>
+                    <a href="#pakketten" class="btn-secondary">Bekijk Pakketten</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/08/1K9A0862.webp" alt="Rijschool Vermeer Auto">
             </div>
         </div>
     </section>
-    
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <h2 class="section-title fade-in">Onze Diensten</h2>
-            <p class="section-subtitle fade-in">Van theorie tot rijbewijs - wij begeleiden u</p>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item fade-in">
+                <div class="stat-number" data-target="45">0</div>
+                <div class="stat-label">Jaar Ervaring</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">68%</div>
+                <div class="stat-label">Slagingspercentage</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Geslaagden</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">9.5</div>
+                <div class="stat-label">Klantscore</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="diensten">
+        <div class="services-container">
+            <div class="section-header fade-in">
+                <div class="section-badge">Onze Diensten</div>
+                <h2 class="section-title">Rijles in Alle Categorieën</h2>
+                <p class="section-subtitle">Van auto tot vrachtwagen, van motor tot bromfiets. Bij Rijschool Vermeer ben je aan het juiste adres voor al je rijopleidingen.</p>
+            </div>
             <div class="services-grid">
-                
                 <div class="service-card fade-in">
-                    <div class="service-icon">🔧</div>
-                    <h3>Auto Rijbewijs (B)</h3>
-                    <p>Complete rijopleiding van theorie tot praktijkexamen. Flexibele lestijden.</p>
+                    <div class="service-icon">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/car_bl.svg" alt="Auto">
+                    </div>
+                    <h3>Auto</h3>
+                    <p>Haal je rijbewijs B bij een van de beste rijscholen van de regio. Met onze ervaren instructeurs en moderne lesauto's leer je veilig en verantwoord rijden.</p>
+                    <a href="#" class="service-link">Meer info →</a>
                 </div>
                 <div class="service-card fade-in">
-                    <div class="service-icon">⚡</div>
-                    <h3>Vrachtwagen (C/CE)</h3>
-                    <p>Professionele vrachtwagenopleidingen voor wie in transport wil werken.</p>
+                    <div class="service-icon">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/truck_bl.svg" alt="Vrachtwagen">
+                    </div>
+                    <h3>Vrachtwagen</h3>
+                    <p>Leren rijden in een vrachtwagen is een vak apart. Wij leiden je op tot professioneel chauffeur met aandacht voor veiligheid en techniek.</p>
+                    <a href="#" class="service-link">Meer info →</a>
                 </div>
                 <div class="service-card fade-in">
-                    <div class="service-icon">🎯</div>
+                    <div class="service-icon">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/code95_bl.svg" alt="Code 95">
+                    </div>
                     <h3>Code 95</h3>
-                    <p>Nascholing voor vrachtwagen- en buschauffeurs. Houd uw bevoegdheid actueel.</p>
+                    <p>Voldoe aan de wettelijke eisen voor beroepschauffeurs. Wij verzorgen zowel de basiskwalificatie als de verplichte nascholing.</p>
+                    <a href="#" class="service-link">Meer info →</a>
                 </div>
                 <div class="service-card fade-in">
-                    <div class="service-icon">💎</div>
-                    <h3>Aanhangwagen (BE)</h3>
-                    <p>Leer veilig rijden met aanhangwagen of caravan. Praktische training.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🚀</div>
-                    <h3>Bromfiets (AM)</h3>
-                    <p>Bromfietscursus voor jongeren. Begin jong met verkeerservaring.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🏆</div>
-                    <h3>45 Jaar Ervaring</h3>
-                    <p>Ruim vier decennia ervaring in het opleiden van veilige chauffeurs.</p>
+                    <div class="service-icon">
+                        <img src="https://www.rijschoolvermeer.nl/wp-content/uploads/2021/07/book_bl.svg" alt="Theorie">
+                    </div>
+                    <h3>2-Daagse Theoriecursus</h3>
+                    <p>In samenwerking met Theoriecentrum Amersfoort. Moderne apparatuur en up-to-date kennis voor maximale slagingskans.</p>
+                    <a href="#" class="service-link">Meer info →</a>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Neem Contact Op</h2>
-            <p class="section-subtitle">We staan voor u klaar. Neem vrijblijvend contact op!</p>
-            <div class="contact-content">
-                <div class="contact-info">
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div class="contact-details">
-                            <h4>Adres</h4>
-                            <p>De Hooistreep 26, 3751 LW Bunschoten-Spakenburg</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📞</div>
-                        <div class="contact-details">
-                            <h4>Telefoon</h4>
-                            <p><a href="tel:0332990063">033 299 00 63</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">✉️</div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <p><a href="mailto:wim@rijschoolvermeer.nl">wim@rijschoolvermeer.nl</a></p>
-                        </div>
-                    </div>
+
+    <!-- Packages -->
+    <section class="packages" id="pakketten">
+        <div class="packages-container">
+            <div class="section-header fade-in">
+                <div class="section-badge">Onze Pakketten</div>
+                <h2 class="section-title">Kies Het Pakket Dat Bij Je Past</h2>
+                <p class="section-subtitle">Scherpe prijzen, duidelijke afspraken en altijd gespreid betalen mogelijk. Geen verrassingen!</p>
+            </div>
+            <div class="packages-grid">
+                <div class="package-card fade-in">
+                    <div class="package-badge">Starter</div>
+                    <h3>Basis Pakket</h3>
+                    <div class="package-price">€1.795</div>
+                    <div class="package-period">30 rijlessen</div>
+                    <ul class="package-features">
+                        <li><span class="check-icon">✓</span> 30 rijlessen (60 min)</li>
+                        <li><span class="check-icon">✓</span> Gratis praktijkboek</li>
+                        <li><span class="check-icon">✓</span> Vaste instructeur</li>
+                        <li><span class="check-icon">✓</span> Tussentijdse toets</li>
+                        <li><span class="check-icon">✓</span> CBR examenaanvraag</li>
+                    </ul>
+                    <a href="#aanmelden" class="package-cta">Kies Dit Pakket</a>
                 </div>
-                <div class="map-container">
-                    
-                    <iframe 
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        style="border:0; border-radius: 20px;" 
-                        src="https://www.google.com/maps?q=De+Hooistreep+26,+3751+LW+Bunschoten-Spakenburg&output=embed"
-                        allowfullscreen>
-                    </iframe>
+                <div class="package-card featured fade-in">
+                    <div class="package-badge">Meest Gekozen</div>
+                    <h3>Compleet Pakket</h3>
+                    <div class="package-price">€2.395</div>
+                    <div class="package-period">40 rijlessen + theorie</div>
+                    <ul class="package-features">
+                        <li><span class="check-icon">✓</span> 40 rijlessen (60 min)</li>
+                        <li><span class="check-icon">✓</span> 2-daagse theoriecursus</li>
+                        <li><span class="check-icon">✓</span> Gratis praktijkboek</li>
+                        <li><span class="check-icon">✓</span> Vaste instructeur</li>
+                        <li><span class="check-icon">✓</span> Tussentijdse toets</li>
+                        <li><span class="check-icon">✓</span> CBR examenaanvraag</li>
+                        <li><span class="check-icon">✓</span> Faalangst begeleiding</li>
+                    </ul>
+                    <a href="#aanmelden" class="package-cta">Kies Dit Pakket</a>
+                </div>
+                <div class="package-card fade-in">
+                    <div class="package-badge">Premium</div>
+                    <h3>All-In Pakket</h3>
+                    <div class="package-price">€2.995</div>
+                    <div class="package-period">50 rijlessen + extra's</div>
+                    <ul class="package-features">
+                        <li><span class="check-icon">✓</span> 50 rijlessen (60 min)</li>
+                        <li><span class="check-icon">✓</span> 2-daagse theoriecursus</li>
+                        <li><span class="check-icon">✓</span> Gratis praktijkboek</li>
+                        <li><span class="check-icon">✓</span> Vaste instructeur</li>
+                        <li><span class="check-icon">✓</span> Tussentijdse toets</li>
+                        <li><span class="check-icon">✓</span> CBR examenaanvraag</li>
+                        <li><span class="check-icon">✓</span> Faalangst begeleiding</li>
+                        <li><span class="check-icon">✓</span> 1 Gratis herexamen</li>
+                    </ul>
+                    <a href="#aanmelden" class="package-cta">Kies Dit Pakket</a>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Why Vermeer -->
+    <section class="why" id="waarom">
+        <div class="why-container">
+            <div class="why-header fade-in">
+                <h2>Waarom Rijschool Vermeer?</h2>
+                <p>Maak de juiste keuze voor jouw rijopleiding</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-item fade-in">
+                    <div class="why-icon">🎯</div>
+                    <h3>Aantoonbaar Hoog Slagingspercentage</h3>
+                    <p>68% van onze leerlingen slaagt in één keer. Zie cbr.nl voor bewijs!</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">👨‍🏫</div>
+                    <h3>Altijd Vaste Instructeur</h3>
+                    <p>Elke les dezelfde instructeur die jouw voortgang kent en begeleidt.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">💰</div>
+                    <h3>Scherpe Prijzen</h3>
+                    <p>Beste prijs-kwaliteit verhouding in de regio. Gespreid betalen mogelijk!</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">📚</div>
+                    <h3>Gratis Praktijkboek</h3>
+                    <p>Bij elk pakket ontvang je gratis het praktijkboek voor optimale voorbereiding.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">📅</div>
+                    <h3>Theorielessen</h3>
+                    <p>Professionele 2-daagse theoriecursus voor maximale slagingskans.</p>
+                </div>
+                <div class="why-item fade-in">
+                    <div class="why-icon">🤝</div>
+                    <h3>Gespreid Betalen</h3>
+                    <p>Rentevrij gespreid betalen mogelijk, zodat iedereen zijn rijbewijs kan halen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="aanmelden">
+        <div class="cta-container">
+            <h2>Klaar om te Starten?</h2>
+            <p>Vraag vandaag nog een gratis proefles aan en ervaar zelf waarom wij een van de beste rijscholen zijn!</p>
+            <div class="cta-buttons">
+                <a href="tel:0332981234" class="btn-white">Bel Direct</a>
+                <a href="#" class="btn-primary">Gratis Proefles</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Rijschool Vermeer. Alle rechten voorbehouden.</p>
-            <div class="footer-links">
-                
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Rijschool Vermeer</h3>
+                <p>Regio Bunschoten, Amersfoort,<br>Nijkerk en Baarn</p>
+                <p>Tel: 033 298 12 34</p>
+                <p>info@rijschoolvermeer.nl</p>
             </div>
-            <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.9rem;">
-                Website ontworpen door <a href="https://thebusinessbooster.nl" style="color: var(--accent-color);">The Business Booster</a>
-            </p>
+            <div class="footer-section">
+                <h3>Diensten</h3>
+                <a href="#">Auto Rijles</a>
+                <a href="#">Vrachtwagen</a>
+                <a href="#">Motor</a>
+                <a href="#">Code 95</a>
+                <a href="#">Theoriecursus</a>
+            </div>
+            <div class="footer-section">
+                <h3>Info</h3>
+                <a href="#">Over Ons</a>
+                <a href="#">Slagingspercentage</a>
+                <a href="#">Pakketten</a>
+                <a href="#">Veelgestelde Vragen</a>
+            </div>
+            <div class="footer-section">
+                <h3>Volg Ons</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rijschool Vermeer. Alle rechten voorbehouden.</p>
+            <p class="footer-credit">Website ontworpen door The Business Booster</p>
         </div>
     </footer>
-    
+
     <script>
-        // Scroll animations
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Animated counter
+        const animateCounter = (element) => {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    element.textContent = Math.floor(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target + '+';
+                }
+            };
+
+            updateCounter();
+        };
+
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // Animate counters
+                    if (entry.target.querySelector('.stat-number[data-target]')) {
+                        const counter = entry.target.querySelector('.stat-number[data-target]');
+                        animateCounter(counter);
+                    }
                 }
             });
         }, observerOptions);
-        
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
+
+        document.querySelectorAll('.fade-in').forEach((el) => {
+            observer.observe(el);
         });
     </script>
 </body>
