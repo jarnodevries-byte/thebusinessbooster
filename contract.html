@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overeenkomst Website Design & Hosting - The Business Booster</title>
+    <style>
+        @media print {
+            body { margin: 0; padding: 20px; }
+            .no-print { display: none; }
+            .page-break { page-break-after: always; }
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #fff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2563eb;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .parties {
+            margin-bottom: 40px;
+        }
+        
+        .party {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9fafb;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .party h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .party-info {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .info-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 10px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .info-value {
+            color: #1a1a1a;
+        }
+        
+        .fill-in {
+            border-bottom: 1px solid #999;
+            min-width: 300px;
+            display: inline-block;
+            padding: 2px 5px;
+        }
+        
+        h2 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .article {
+            margin-bottom: 30px;
+        }
+        
+        .article-title {
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        
+        .article-content {
+            margin-left: 20px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .highlight-box {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box strong {
+            color: #92400e;
+        }
+        
+        .signatures {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .signature-block {
+            padding-top: 20px;
+        }
+        
+        .signature-block h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .signature-line {
+            margin-top: 60px;
+            padding-top: 10px;
+            border-top: 2px solid #333;
+        }
+        
+        .signature-info {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .print-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37,99,235,0.4);
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button no-print" onclick="window.print()">🖨️ Printen</button>
+    
+    <div class="header">
+        <h1>OVEREENKOMST WEBSITE DESIGN, HOSTING & ONDERHOUD</h1>
+        <p>The Business Booster</p>
+    </div>
+    
+    <div class="parties">
+        <div class="party">
+            <h3>Opdrachtnemer</h3>
+            <div class="party-info">
+                <div class="info-row">
+                    <span class="info-label">Bedrijfsnaam:</span>
+                    <span class="info-value">The Business Booster</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">info@thebusinessbooster.nl</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Website:</span>
+                    <span class="info-value">thebusinessbooster.nl</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="party">
+            <h3>Opdrachtgever</h3>
+            <div class="party-info">
+                <div class="info-row">
+                    <span class="info-label">Bedrijfsnaam:</span>
+                    <span class="fill-in"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Contactpersoon:</span>
+                    <span class="fill-in"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Adres:</span>
+                    <span class="fill-in"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Telefoon:</span>
+                    <span class="fill-in"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="fill-in"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">KVK-nummer:</span>
+                    <span class="fill-in"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Partijen komen het volgende overeen:</h2>
+    
+    <div class="article">
+        <div class="article-title">Artikel 1 - Dienstverlening</div>
+        <div class="article-content">
+            <p>Opdrachtnemer zal voor Opdrachtgever de volgende diensten verlenen:</p>
+            <ul>
+                <li><strong>Website Design:</strong> Ontwerp en realisatie van een moderne, responsive website volgens de specificaties en wensen van Opdrachtgever;</li>
+                <li><strong>Hosting:</strong> Het hosten van de website op een betrouwbaar platform met gegarandeerde uptime;</li>
+                <li><strong>Onderhoud:</strong> Regelmatig technisch onderhoud, beveiligingsupdates en back-ups van de website;</li>
+                <li><strong>Support:</strong> Technische ondersteuning bij vragen of problemen met betrekking tot de website.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 2 - Looptijd en Opzegtermijn</div>
+        <div class="article-content">
+            <p>Deze overeenkomst heeft een looptijd van <strong>12 maanden</strong>, ingaande op de datum van ondertekening door beide partijen.</p>
+            <p>Na afloop van de initiële periode van 12 maanden wordt de overeenkomst automatisch voortgezet voor onbepaalde tijd, tenzij één van de partijen de overeenkomst opzegt met inachtneming van een opzegtermijn van <strong>1 maand</strong>.</p>
+        </div>
+    </div>
+    
+    <div class="highlight-box">
+        <strong>Prijs & Betaling</strong><br>
+        Opdrachtgever betaalt aan Opdrachtnemer een vast bedrag van <strong>€150,- per maand</strong> (exclusief BTW indien van toepassing).
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 3 - Prijs en Betalingsvoorwaarden</div>
+        <div class="article-content">
+            <p>3.1. Voor de in artikel 1 genoemde diensten betaalt Opdrachtgever aan Opdrachtnemer een vast maandbedrag van <strong>€150,- (honderdvijftig euro)</strong> exclusief BTW.</p>
+            <p>3.2. De betaling geschiedt maandelijks vooraf via automatische incasso of bankoverschrijving.</p>
+            <p>3.3. De eerste betaling dient te geschieden binnen 7 dagen na ondertekening van deze overeenkomst.</p>
+            <p>3.4. Bij niet-tijdige betaling is Opdrachtgever, zonder dat ingebrekestelling is vereist, in verzuim en is Opdrachtnemer gerechtigd wettelijke rente in rekening te brengen.</p>
+            <p>3.5. De totale investering voor de eerste 12 maanden bedraagt <strong>€1.800,- (achttienhonderd euro)</strong> exclusief BTW.</p>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 4 - Verplichtingen Opdrachtnemer</div>
+        <div class="article-content">
+            <p>Opdrachtnemer verplicht zich tot:</p>
+            <ol>
+                <li>Het ontwerpen en opleveren van een professionele, moderne website binnen 4 weken na ondertekening;</li>
+                <li>Het hosten van de website met een gegarandeerde uptime van minimaal 99%;</li>
+                <li>Het uitvoeren van regelmatige beveiligingsupdates en back-ups;</li>
+                <li>Het binnen 48 uur reageren op support-aanvragen van Opdrachtgever;</li>
+                <li>Het verlenen van technische ondersteuning gedurende kantooruren (ma-vr, 09:00-17:00).</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 5 - Verplichtingen Opdrachtgever</div>
+        <div class="article-content">
+            <p>Opdrachtgever verplicht zich tot:</p>
+            <ol>
+                <li>Het tijdig aanleveren van alle benodigde informatie, content en materialen voor de website;</li>
+                <li>Het tijdig betalen van de overeengekomen maandelijkse vergoeding;</li>
+                <li>Het verlenen van medewerking die redelijkerwijs nodig is voor een goede uitvoering van de opdracht;</li>
+                <li>Het verstrekken van toegang tot relevante accounts en systemen waar nodig.</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 6 - Intellectueel Eigendom</div>
+        <div class="article-content">
+            <p>6.1. Alle intellectuele eigendomsrechten met betrekking tot de door Opdrachtnemer ontwikkelde website berusten bij Opdrachtnemer, tenzij schriftelijk anders is overeengekomen.</p>
+            <p>6.2. Opdrachtgever verkrijgt een niet-exclusief gebruiksrecht voor de website gedurende de looptijd van deze overeenkomst.</p>
+            <p>6.3. Content (teksten, afbeeldingen, logo's) aangeleverd door Opdrachtgever blijft eigendom van Opdrachtgever.</p>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 7 - Aansprakelijkheid</div>
+        <div class="article-content">
+            <p>7.1. Opdrachtnemer is niet aansprakelijk voor schade als gevolg van storingen, onderbrekingen of uitval van de website, tenzij sprake is van opzet of grove schuld.</p>
+            <p>7.2. De aansprakelijkheid van Opdrachtnemer is in alle gevallen beperkt tot het bedrag van de door Opdrachtgever in de drie maanden voorafgaand aan het schadebrengende feit betaalde vergoedingen.</p>
+            <p>7.3. Opdrachtnemer is niet aansprakelijk voor indirecte schade, waaronder gevolgschade, gederfde winst en gemiste besparingen.</p>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 8 - Vertrouwelijkheid</div>
+        <div class="article-content">
+            <p>Beide partijen verplichten zich tot geheimhouding van alle vertrouwelijke informatie die zij in het kader van deze overeenkomst van elkaar hebben verkregen.</p>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 9 - Wijzigingen</div>
+        <div class="article-content">
+            <p>Wijzigingen of aanvullingen op deze overeenkomst zijn slechts geldig indien deze schriftelijk door beide partijen zijn overeengekomen.</p>
+        </div>
+    </div>
+    
+    <div class="article">
+        <div class="article-title">Artikel 10 - Toepasselijk Recht en Geschillen</div>
+        <div class="article-content">
+            <p>10.1. Op deze overeenkomst is Nederlands recht van toepassing.</p>
+            <p>10.2. Alle geschillen voortvloeiende uit of verband houdende met deze overeenkomst zullen worden voorgelegd aan de bevoegde rechter in Nederland.</p>
+        </div>
+    </div>
+    
+    <div class="signatures">
+        <div class="signature-block">
+            <h4>Opdrachtnemer</h4>
+            <div class="signature-line"></div>
+            <div class="signature-info">
+                The Business Booster<br>
+                Naam: <span class="fill-in" style="min-width: 150px;"></span><br>
+                Datum: <span class="fill-in" style="min-width: 150px;"></span>
+            </div>
+        </div>
+        
+        <div class="signature-block">
+            <h4>Opdrachtgever</h4>
+            <div class="signature-line"></div>
+            <div class="signature-info">
+                Bedrijfsnaam: <span class="fill-in" style="min-width: 150px;"></span><br>
+                Naam: <span class="fill-in" style="min-width: 150px;"></span><br>
+                Datum: <span class="fill-in" style="min-width: 150px;"></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Deze overeenkomst is opgesteld in twee exemplaren, waarvan elke partij één exemplaar heeft ontvangen.</p>
+        <p style="margin-top: 10px;">The Business Booster - Professionele websites voor lokale bedrijven</p>
+    </div>
+</body>
+</html>
