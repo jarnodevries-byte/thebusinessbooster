@@ -3,264 +3,569 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tauros Media - Uw E-commerce & Blockchain Partner</title>
+<title>Tauros Media — E-commerce & Blockchain Partner</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        teal: { DEFAULT: '#196f92', dark: '#0f4d6a', light: '#1d8ab5' },
+        gold: { DEFAULT: '#ca9f5c', light: '#dbb97e' },
+        dark: { DEFAULT: '#0a0a0a', 100: '#111', 200: '#1a1a1a', 300: '#222' },
+      },
+      fontFamily: {
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        body: ['DM Sans', 'system-ui', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--teal:#196f92;--dark:#212121;--gold:#ca9f5c;--orange:#ffa902;--light:#f5f5f5}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--dark);color:#fff;overflow-x:hidden}
-a{color:var(--gold);text-decoration:none}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: #196f92; color: #fff; }
+html { scroll-behavior: smooth; }
+body { background: #0a0a0a; color: #fff; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
 
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(33,33,33,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(25,111,146,.3);transition:all .3s}
-nav img{height:45px}
-nav ul{list-style:none;display:flex;gap:30px}
-nav ul li a{color:#ccc;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;transition:color .3s}
-nav ul li a:hover{color:var(--gold)}
+/* CURSOR GLOW */
+.cursor-glow {
+  position: fixed; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(25,111,146,0.08) 0%, transparent 70%);
+  pointer-events: none; z-index: 0; transform: translate(-50%, -50%);
+  transition: left 0.3s ease-out, top 0.3s ease-out;
+}
 
-/* HERO SLIDER */
-.hero{position:relative;height:100vh;overflow:hidden}
-.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
-.hero-slide.active{opacity:1}
-.hero-slide img{width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(33,33,33,.85),rgba(25,111,146,.5))}
-.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:2;padding:0 20px}
-.hero-content h1{font-size:3.5rem;font-weight:700;margin-bottom:15px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
-.hero-content h1 span{color:var(--gold)}
-.hero-content p{font-size:1.3rem;color:#ccc;margin-bottom:30px}
-.hero-content .tagline{color:var(--orange);font-size:1.1rem;text-transform:uppercase;letter-spacing:3px;margin-bottom:10px}
-.btn{display:inline-block;padding:14px 40px;background:var(--teal);color:#fff;border-radius:4px;font-weight:600;text-transform:uppercase;letter-spacing:1px;transition:all .3s;border:2px solid var(--teal)}
-.btn:hover{background:transparent;color:var(--gold);border-color:var(--gold)}
-.slider-dots{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3}
-.slider-dots span{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
-.slider-dots span.active{background:var(--gold);transform:scale(1.2)}
+/* GRAIN OVERLAY */
+.grain::after {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-/* SECTIONS */
-section{padding:100px 5%}
-.section-title{text-align:center;margin-bottom:60px}
-.section-title h2{font-size:2.5rem;color:#fff;margin-bottom:10px}
-.section-title .accent{width:60px;height:3px;background:var(--gold);margin:15px auto}
-.section-title p{color:#999;font-size:1.1rem}
+/* MAGNETIC BUTTON */
+.magnetic-btn {
+  position: relative; display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; background: transparent; border: 1.5px solid rgba(202,159,92,0.4);
+  color: #ca9f5c; font-family: 'Space Grotesk'; font-size: 0.85rem; letter-spacing: 2px;
+  text-transform: uppercase; cursor: pointer; transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+  overflow: hidden;
+}
+.magnetic-btn::before {
+  content: ''; position: absolute; inset: 0; background: #ca9f5c;
+  transform: scaleX(0); transform-origin: right; transition: transform 0.5s cubic-bezier(0.165,0.84,0.44,1);
+}
+.magnetic-btn:hover::before { transform: scaleX(1); transform-origin: left; }
+.magnetic-btn:hover { color: #0a0a0a; border-color: #ca9f5c; }
+.magnetic-btn span { position: relative; z-index: 1; }
 
-/* STATS */
-.stats{background:var(--teal);padding:60px 5%;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
-.stat h3{font-size:3rem;color:var(--gold);font-weight:700}
-.stat p{color:rgba(255,255,255,.8);font-size:.95rem;margin-top:5px}
+/* REVEAL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(60px); transition: all 0.9s cubic-bezier(0.165,0.84,0.44,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-80px); transition: all 0.9s cubic-bezier(0.165,0.84,0.44,1); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(80px); transition: all 0.9s cubic-bezier(0.165,0.84,0.44,1); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.9); transition: all 0.8s cubic-bezier(0.165,0.84,0.44,1); }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-/* SERVICES */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1200px;margin:0 auto}
-.service-card{background:rgba(255,255,255,.05);border-radius:8px;overflow:hidden;transition:all .4s;border:1px solid rgba(25,111,146,.2)}
-.service-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.service-card img{width:100%;height:200px;object-fit:cover}
-.service-card .card-body{padding:25px}
-.service-card h3{color:var(--gold);font-size:1.3rem;margin-bottom:10px}
-.service-card p{color:#aaa;font-size:.9rem;line-height:1.6}
+/* STAGGER CHILDREN */
+.stagger > * { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.165,0.84,0.44,1); }
+.stagger.visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(3) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(4) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(5) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(6) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
 
-/* CLIENTS */
-.clients{background:rgba(25,111,146,.08)}
-.clients-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:30px;max-width:1100px;margin:0 auto}
-.clients-grid img{height:50px;opacity:.6;filter:grayscale(100%) brightness(2);transition:all .4s}
-.clients-grid img:hover{opacity:1;filter:none;transform:scale(1.1)}
+/* TEXT SPLIT REVEAL */
+.split-text span { display: inline-block; opacity: 0; transform: translateY(100%); transition: all 0.6s cubic-bezier(0.165,0.84,0.44,1); }
+.split-text.visible span { opacity: 1; transform: translateY(0); }
 
-/* PORTFOLIO */
-.portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto}
-.portfolio-item{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:300/203}
-.portfolio-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.portfolio-item:hover img{transform:scale(1.1)}
-.portfolio-item .overlay{position:absolute;inset:0;background:rgba(25,111,146,.85);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s}
-.portfolio-item:hover .overlay{opacity:1}
-.portfolio-item .overlay span{color:#fff;font-weight:600;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px}
+/* HERO */
+.hero-img { position: absolute; inset: 0; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3) saturate(0.8); }
 
-/* TESTIMONIALS */
-.testimonials{background:linear-gradient(135deg,var(--dark),rgba(25,111,146,.15))}
-.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:1100px;margin:0 auto}
-.testimonial{background:rgba(255,255,255,.04);padding:35px;border-radius:8px;border-left:3px solid var(--gold);position:relative}
-.testimonial p{color:#bbb;font-style:italic;line-height:1.7;margin-bottom:20px}
-.testimonial .author{display:flex;align-items:center;gap:15px}
-.testimonial .author img{width:55px;height:55px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
-.testimonial .author div strong{color:#fff;display:block}
-.testimonial .author div span{color:var(--gold);font-size:.85rem}
+/* HORIZONTAL MARQUEE */
+.marquee { display: flex; gap: 80px; animation: marquee 25s linear infinite; }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* FEATURED */
-.featured{text-align:center}
-.featured .quote{font-size:1.8rem;color:var(--gold);font-style:italic;max-width:800px;margin:0 auto 15px}
-.featured .motto{font-size:1.2rem;color:#999;margin-top:40px}
-.featured .motto strong{color:var(--orange)}
+/* SERVICE CARD */
+.service-card {
+  position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02); transition: all 0.5s cubic-bezier(0.165,0.84,0.44,1);
+}
+.service-card:hover {
+  border-color: rgba(25,111,146,0.3); background: rgba(25,111,146,0.05);
+  transform: translateY(-8px);
+}
+.service-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #196f92, transparent);
+  opacity: 0; transition: opacity 0.5s;
+}
+.service-card:hover::after { opacity: 1; }
+.service-card img { transition: transform 0.6s cubic-bezier(0.165,0.84,0.44,1); }
+.service-card:hover img { transform: scale(1.05); }
 
-/* APPROACH */
-.approach{background:var(--teal);text-align:center;padding:80px 5%}
-.approach h2{font-size:2.5rem;margin-bottom:15px}
-.approach p{font-size:1.2rem;color:rgba(255,255,255,.8);max-width:700px;margin:0 auto}
-.approach .tags{display:flex;justify-content:center;gap:15px;margin-top:30px;flex-wrap:wrap}
-.approach .tags span{padding:8px 20px;border:1px solid rgba(255,255,255,.3);border-radius:20px;font-size:.9rem;color:rgba(255,255,255,.8)}
+/* PORTFOLIO GRID */
+.portfolio-item {
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.portfolio-item img { transition: transform 0.7s cubic-bezier(0.165,0.84,0.44,1); }
+.portfolio-item:hover img { transform: scale(1.08); }
+.portfolio-overlay {
+  position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(25,111,146,0.9));
+  opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 24px;
+}
+.portfolio-item:hover .portfolio-overlay { opacity: 1; }
 
-/* FOOTER */
-footer{background:#111;padding:40px 5%;text-align:center;border-top:1px solid rgba(25,111,146,.3)}
-footer img{height:35px;margin-bottom:15px}
-footer p{color:#666;font-size:.85rem}
-footer .credit{color:var(--gold);margin-top:10px}
+/* TESTIMONIAL */
+.testimonial-card {
+  border-left: 2px solid #ca9f5c; padding-left: 30px;
+  transition: all 0.4s; position: relative;
+}
+.testimonial-card::before {
+  content: '"'; position: absolute; top: -20px; left: 10px;
+  font-size: 6rem; color: rgba(202,159,92,0.1); font-family: Georgia, serif; line-height: 1;
+}
 
-/* ANIMATIONS */
-.fade-in{opacity:0;transform:translateY(30px);transition:all .8s ease}
-.fade-in.visible{opacity:1;transform:none}
+/* COUNTER */
+.counter { font-variant-numeric: tabular-nums; }
+
+/* HORIZONTAL LINE */
+.h-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #196f92; border-radius: 3px; }
 
 /* RESPONSIVE */
-@media(max-width:768px){
- .hero-content h1{font-size:2rem}
- .stats{grid-template-columns:repeat(2,1fr)}
- .services-grid{grid-template-columns:1fr}
- .portfolio-grid{grid-template-columns:repeat(2,1fr)}
- .testimonials-grid{grid-template-columns:1fr}
- nav ul{display:none}
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem !important; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .services-grid { grid-template-columns: 1fr !important; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .split-section { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
-<body>
+<body class="grain">
 
-<nav>
- <img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/main-logo.png" alt="Tauros Media">
- <ul>
-  <li><a href="#services">Services</a></li>
-  <li><a href="#portfolio">Portfolio</a></li>
-  <li><a href="#clients">Klanten</a></li>
-  <li><a href="#testimonials">Reviews</a></li>
-  <li><a href="#contact">Contact</a></li>
- </ul>
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-500" id="nav">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+    <a href="#"><img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/main-logo.png" alt="Tauros Media" class="h-10"></a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-white/60 hover:text-gold text-sm font-display tracking-wider uppercase transition-colors">Services</a>
+      <a href="#work" class="text-white/60 hover:text-gold text-sm font-display tracking-wider uppercase transition-colors">Work</a>
+      <a href="#clients" class="text-white/60 hover:text-gold text-sm font-display tracking-wider uppercase transition-colors">Clients</a>
+      <a href="#about" class="text-white/60 hover:text-gold text-sm font-display tracking-wider uppercase transition-colors">About</a>
+      <a href="#contact" class="magnetic-btn"><span>Let's Talk</span></a>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO SLIDER -->
-<section class="hero">
- <div class="hero-slide active"><img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/tauros-profuomo.jpg" alt="Profuomo"><div class="hero-overlay"></div></div>
- <div class="hero-slide"><img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/home-slider.jpg" alt="Tauros"><div class="hero-overlay"></div></div>
- <div class="hero-slide"><img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/amg-petronas.jpg" alt="AMG Petronas"><div class="hero-overlay"></div></div>
- <div class="hero-slide"><img src="https://www.taurosmedia.com/wp-content/uploads/2020/01/enterprise-webshop-Blokker.jpg" alt="Blokker"><div class="hero-overlay"></div></div>
- <div class="hero-content">
-  <p class="tagline">Sinds 2008</p>
-  <h1>Uw E-commerce &amp; <span>Blockchain</span> Partner</h1>
-  <p>Magento webshops, apps, WordPress, blockchain, modules, extensies en maatwerk</p>
-  <a href="#services" class="btn">Ontdek onze diensten</a>
- </div>
- <div class="slider-dots"><span class="active"></span><span></span><span></span><span></span></div>
+<!-- HERO -->
+<section class="relative h-screen flex items-center overflow-hidden">
+  <!-- Animated bg images -->
+  <div class="hero-img" id="heroSlider">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/amg-petronas.jpg" alt="" class="active" id="heroImg">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-b from-dark/60 via-dark/40 to-dark z-10"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dark to-transparent z-10"></div>
+  
+  <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <p class="font-display text-gold/80 text-sm tracking-[6px] uppercase mb-6 reveal">Since 2008</p>
+      <h1 class="font-display text-6xl md:text-8xl font-bold leading-[0.95] mb-8 hero-title">
+        <span class="block reveal" style="transition-delay:0.1s">We build</span>
+        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-teal-light to-teal reveal" style="transition-delay:0.2s">digital</span>
+        <span class="block reveal" style="transition-delay:0.3s">empires<span class="text-gold">.</span></span>
+      </h1>
+      <p class="text-white/50 text-lg md:text-xl max-w-lg mb-10 reveal" style="transition-delay:0.4s">
+        E-commerce & blockchain bureau voor merken die willen winnen. Van strategie tot support.
+      </p>
+      <div class="reveal" style="transition-delay:0.5s">
+        <a href="#work" class="magnetic-btn"><span>Bekijk ons werk →</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero stats strip -->
+  <div class="absolute bottom-0 left-0 right-0 z-20 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-3 gap-8">
+      <div class="reveal" style="transition-delay:0.6s">
+        <span class="font-display text-3xl font-bold text-gold counter" data-target="1100">0</span><span class="text-gold text-xl">+</span>
+        <p class="text-white/30 text-sm mt-1">Websites & Webshops</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.7s">
+        <span class="font-display text-3xl font-bold text-gold counter" data-target="240">0</span><span class="text-gold text-xl">+</span>
+        <p class="text-white/30 text-sm mt-1">Modules & Apps</p>
+      </div>
+      <div class="reveal" style="transition-delay:0.8s">
+        <span class="font-display text-3xl font-bold text-gold counter" data-target="1300">0</span><span class="text-gold text-xl">+</span>
+        <p class="text-white/30 text-sm mt-1">Trouwe Relaties</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
- <div class="stat fade-in"><h3 class="counter" data-target="240">0</h3><p>Modules &amp; Apps</p></div>
- <div class="stat fade-in"><h3 class="counter" data-target="1100">0</h3><p>Websites &amp; Webshops</p></div>
- <div class="stat fade-in"><h3 class="counter" data-target="350">0</h3><p>Online Marketing Projects</p></div>
- <div class="stat fade-in"><h3 class="counter" data-target="1300">0</h3><p>Trouwe Relaties</p></div>
+<!-- CLIENT LOGOS MARQUEE -->
+<div class="py-10 border-y border-white/5 overflow-hidden bg-dark-200">
+  <div class="marquee">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/AMG-PETRONAS-300x118.jpg" alt="AMG Petronas" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PROFUOMO-300x118.jpg" alt="Profuomo" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BRABANTIA-300x118.jpg" alt="Brabantia" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PUMA-300x118.jpg" alt="Puma" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/VINGINO-300x118.jpg" alt="Vingino" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/JUST-EAT-300x118.jpg" alt="Just Eat" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BCC-300x118.jpg" alt="BCC" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/HAAS-F1-TEAM-300x118.jpg" alt="Haas F1" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/SANDTON-300x118.jpg" alt="Sandton" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BERGSALA-ENIGMA-300x118.jpg" alt="Bergsala" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/MICHAELIS-300x118.jpg" alt="Michaelis" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/NOSHIRT-300x118.jpg" alt="No Shirt" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/FACILITYLIN-300x118.jpg" alt="FacilityLinQ" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/CHOOSEBEAUTY-300x118.jpg" alt="Choosebeauty" class="h-10 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0">
+    <!-- Duplicate for seamless loop -->
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/AMG-PETRONAS-300x118.jpg" alt="AMG Petronas" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PROFUOMO-300x118.jpg" alt="Profuomo" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BRABANTIA-300x118.jpg" alt="Brabantia" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PUMA-300x118.jpg" alt="Puma" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/VINGINO-300x118.jpg" alt="Vingino" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/JUST-EAT-300x118.jpg" alt="Just Eat" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BCC-300x118.jpg" alt="BCC" class="h-10 opacity-40 grayscale">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/HAAS-F1-TEAM-300x118.jpg" alt="Haas F1" class="h-10 opacity-40 grayscale">
+  </div>
 </div>
 
 <!-- SERVICES -->
-<section id="services">
- <div class="section-title"><h2>Onze Diensten</h2><div class="accent"></div><p>Van strategie tot hosting — wij ontzorgen u volledig</p></div>
- <div class="services-grid">
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Design-300x199.jpg" alt="Strategie"><div class="card-body"><h3>Strategie</h3><p>Uw doelgroep denkt niet in kanalen, maar heeft een behoefte die op een bepaald moment vervuld moet worden.</p></div></div>
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2016/03/creatie-1.png" alt="Creatie"><div class="card-body"><h3>Creatie</h3><p>Dankzij onze jarenlange expertise op het gebied van design weten wij waaraan een design van een succesvolle website moet voldoen.</p></div></div>
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/development-300x200.jpg" alt="Techniek"><div class="card-body"><h3>Techniek</h3><p>Team van 64 ontwikkelaars op het gebied van Blockchain, Magento, WordPress, Java, .NET, Zend, Ruby, mobiele apps</p></div></div>
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Marketing-300x199.jpg" alt="Marketing"><div class="card-body"><h3>Marketing</h3><p>Van SEO en Google Adwords tot social media marketing, e-mail marketing en zelfs offline marketingvormen</p></div></div>
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Support-300x199.jpg" alt="Support"><div class="card-body"><h3>Support</h3><p>24/7 support. Van elk support uur gaat €1 naar een door u gekozen goed doel.</p></div></div>
-  <div class="service-card fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Hosting-300x199.jpg" alt="Hosting"><div class="card-body"><h3>Hosting</h3><p>Managed hosting, server optimalisatie, automatische backups, systeemupdates</p></div></div>
- </div>
+<section id="services" class="py-32 relative">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-4 mb-4 reveal">
+      <div class="w-12 h-[1px] bg-gold"></div>
+      <span class="font-display text-gold text-sm tracking-[4px] uppercase">What we do</span>
+    </div>
+    <h2 class="font-display text-5xl md:text-6xl font-bold mb-20 reveal" style="transition-delay:0.1s">
+      Full-service<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-teal to-teal-light">digital partner</span>
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 services-grid stagger">
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Design-300x199.jpg" alt="Strategie" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Strategie</h3>
+        <p class="text-white/40 text-sm leading-relaxed">Doeltreffende omnichannel strategie die uw doelgroep bereikt op het juiste moment, via het juiste kanaal.</p>
+      </div>
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2016/03/creatie-1.png" alt="Creatie" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Creatie</h3>
+        <p class="text-white/40 text-sm leading-relaxed">De ideale mix van branding, gebruiksvriendelijkheid en conversie. Designs die resultaat leveren.</p>
+      </div>
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/development-300x200.jpg" alt="Techniek" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Techniek</h3>
+        <p class="text-white/40 text-sm leading-relaxed">64 ontwikkelaars. Magento, WordPress, Blockchain, Java, .NET, Ruby, mobiele apps. Alle kennis in huis.</p>
+      </div>
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Marketing-300x199.jpg" alt="Marketing" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Marketing</h3>
+        <p class="text-white/40 text-sm leading-relaxed">SEO, Google Ads, social media, e-mail marketing. Slimme strategie op maat voor uw doelstellingen.</p>
+      </div>
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Support-300x199.jpg" alt="Support" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Support</h3>
+        <p class="text-white/40 text-sm leading-relaxed">24/7 professionele service desk. Van elk support uur gaat €1 naar een door u gekozen goed doel.</p>
+      </div>
+      <div class="service-card rounded-2xl p-8 group">
+        <div class="w-full h-48 rounded-xl overflow-hidden mb-6">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2015/09/Hosting-300x199.jpg" alt="Hosting" class="w-full h-full object-cover">
+        </div>
+        <h3 class="font-display text-xl font-semibold mb-3 group-hover:text-gold transition-colors">Hosting</h3>
+        <p class="text-white/40 text-sm leading-relaxed">Managed hosting met server optimalisatie, automatische backups en systeemupdates. 100% ontzorgd.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- CLIENTS -->
-<section id="clients" class="clients">
- <div class="section-title"><h2>Onze Klanten</h2><div class="accent"></div><p>Vertrouwd door toonaangevende merken</p></div>
- <div class="clients-grid fade-in">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/AMG-PETRONAS-300x118.jpg" alt="AMG Petronas">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PROFUOMO-300x118.jpg" alt="Profuomo">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BRABANTIA-300x118.jpg" alt="Brabantia">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/VINGINO-300x118.jpg" alt="Vingino">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/JUST-EAT-300x118.jpg" alt="Just Eat">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BCC-300x118.jpg" alt="BCC">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/PUMA-300x118.jpg" alt="Puma">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/SANDTON-300x118.jpg" alt="Sandton">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/HAAS-F1-TEAM-300x118.jpg" alt="Haas F1">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/BERGSALA-ENIGMA-300x118.jpg" alt="Bergsala Enigma">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/MICHAELIS-300x118.jpg" alt="Michaelis">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/NOSHIRT-300x118.jpg" alt="NoShirt">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/FACILITYLIN-300x118.jpg" alt="FacilityLinQ">
-  <img src="https://www.taurosmedia.com/wp-content/uploads/2016/02/CHOOSEBEAUTY-300x118.jpg" alt="Choosebeauty">
- </div>
+<div class="h-line"></div>
+
+<!-- FEATURED CASE: WILLIAMS F1 -->
+<section class="py-32 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center split-section">
+      <div class="reveal-left">
+        <span class="font-display text-teal text-sm tracking-[4px] uppercase">Featured Case</span>
+        <h2 class="font-display text-5xl md:text-6xl font-bold mt-4 mb-6">Williams<br>Racing<span class="text-gold">.</span></h2>
+        <p class="text-white/40 leading-relaxed mb-6">
+          Als Formule 1 partner van het eerste uur heeft Tauros Media voor team Williams een razend snelle webshop ontwikkeld. Volledig responsive met naadloze integratie van Docdata en ERP-systeem Navision.
+        </p>
+        <p class="text-white/20 text-sm italic mb-8">"When you love what you do, you convey that feeling, that attitude, that resolve, that love to all around you." — Ayrton Senna</p>
+        <a href="#" class="magnetic-btn"><span>Bekijk case →</span></a>
+      </div>
+      <div class="reveal-right">
+        <div class="relative rounded-2xl overflow-hidden group">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/Williams-3-300x203.jpg" alt="Williams F1" class="w-full rounded-2xl transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
- <div class="section-title"><h2>Portfolio</h2><div class="accent"></div><p>Een selectie van onze projecten</p></div>
- <div class="portfolio-grid">
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/FacilityLinQ-4-300x203.jpg" alt="FacilityLinQ"><div class="overlay"><span>FacilityLinQ</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/Michaelis-1-300x203.jpg" alt="Michaelis"><div class="overlay"><span>Michaelis</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/Vingino-home-2-300x200.jpg" alt="Vingino"><div class="overlay"><span>Vingino</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/Williams-3-300x203.jpg" alt="Williams F1"><div class="overlay"><span>Williams F1</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/just-eat-2-300x188.jpg" alt="Just Eat"><div class="overlay"><span>Just Eat</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/AMG-8-300x203.jpg" alt="AMG Petronas"><div class="overlay"><span>AMG Petronas</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/Choosebeauty-300x203.jpg" alt="Choosebeauty"><div class="overlay"><span>Choosebeauty</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/profuomo-7-300x203.jpg" alt="Profuomo"><div class="overlay"><span>Profuomo</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2016/01/Bergsala-2-300x200.jpg" alt="Bergsala"><div class="overlay"><span>Bergsala</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2016/01/Sandton-3-300x199.jpg" alt="Sandton"><div class="overlay"><span>Sandton</span></div></div>
-  <div class="portfolio-item fade-in"><img src="https://www.taurosmedia.com/wp-content/uploads/2016/01/brabantia-5-300x113.jpg" alt="Brabantia"><div class="overlay"><span>Brabantia</span></div></div>
- </div>
+<div class="h-line"></div>
+
+<!-- PORTFOLIO GRID -->
+<section id="work" class="py-32">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-4 mb-4 reveal">
+      <div class="w-12 h-[1px] bg-gold"></div>
+      <span class="font-display text-gold text-sm tracking-[4px] uppercase">Portfolio</span>
+    </div>
+    <div class="flex justify-between items-end mb-16">
+      <h2 class="font-display text-5xl md:text-6xl font-bold reveal" style="transition-delay:0.1s">
+        Succes<br>cases<span class="text-gold">.</span>
+      </h2>
+      <p class="text-white/30 max-w-sm text-right hidden md:block reveal" style="transition-delay:0.2s">
+        Meer dan 1100 klanten gingen u al voor. Van Formule 1 tot fashion.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 portfolio-grid stagger">
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/AMG-8-300x203.jpg" alt="AMG Petronas" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">AMG Petronas</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/profuomo-7-300x203.jpg" alt="Profuomo" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Profuomo</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/Vingino-home-2-300x200.jpg" alt="Vingino" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Vingino</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/just-eat-2-300x188.jpg" alt="Just Eat" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Just Eat</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2016/01/Bergsala-2-300x200.jpg" alt="Bergsala" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Bergsala</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2012/08/FacilityLinQ-4-300x203.jpg" alt="FacilityLinQ" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">FacilityLinQ</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2016/01/Sandton-3-300x199.jpg" alt="Sandton" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Sandton</span></div>
+      </div>
+      <div class="portfolio-item rounded-xl overflow-hidden aspect-[4/3]">
+        <img src="https://www.taurosmedia.com/wp-content/uploads/2013/07/Choosebeauty-300x203.jpg" alt="Choosebeauty" class="w-full h-full object-cover">
+        <div class="portfolio-overlay"><span class="font-display font-semibold text-sm">Choosebeauty</span></div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<div class="h-line"></div>
 
 <!-- TESTIMONIALS -->
-<section id="testimonials" class="testimonials">
- <div class="section-title"><h2>Wat Klanten Zeggen</h2><div class="accent"></div></div>
- <div class="testimonials-grid">
-  <div class="testimonial fade-in">
-   <p>"Voor de race teams die wij vertegenwoordigen waren we op zoek naar een Magento partner die snel en flexibel kon zijn..."</p>
-   <div class="author"><img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/Carlo-Klaasse-1.jpg" alt="Carlo Klaasse"><div><strong>Carlo Klaasse</strong><span>E-commerce Manager — Puma/Branded</span></div></div>
+<section id="clients" class="py-32 bg-dark-200">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex items-center gap-4 mb-4 reveal">
+      <div class="w-12 h-[1px] bg-gold"></div>
+      <span class="font-display text-gold text-sm tracking-[4px] uppercase">Testimonials</span>
+    </div>
+    <h2 class="font-display text-5xl md:text-6xl font-bold mb-20 reveal" style="transition-delay:0.1s">
+      Wat klanten<br>zeggen<span class="text-gold">.</span>
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 stagger">
+      <div class="testimonial-card">
+        <p class="text-white/60 leading-relaxed mb-8">"Voor de race teams die wij vertegenwoordigen waren we op zoek naar een Magento partner die snel en flexibel kon zijn en gas kon geven op het juiste moment. Tauros werkt flexibel en efficiënt."</p>
+        <div class="flex items-center gap-4">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/Carlo-Klaasse-1.jpg" alt="Carlo Klaasse" class="w-14 h-14 rounded-full object-cover">
+          <div>
+            <p class="font-display font-semibold text-sm">Carlo Klaasse</p>
+            <p class="text-white/30 text-xs">E-commerce Manager — Puma/Branded</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="text-white/60 leading-relaxed mb-8">"Bij de ontwikkeling van onze webshop hebben we in Tauros een krachtige partner gevonden. No-nonsense, houdt zich aan deadlines, en kan omgaan met de complexiteit van vele type IT koppelingen."</p>
+        <div class="flex items-center gap-4">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/guido-verhagen-1.jpg" alt="Guido Verhagen" class="w-14 h-14 rounded-full object-cover">
+          <div>
+            <p class="font-display font-semibold text-sm">Guido Verhagen</p>
+            <p class="text-white/30 text-xs">Commercial Director — Profuomo</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="text-white/60 leading-relaxed mb-8">"Tauros heeft op perfecte wijze een koppeling tussen onze webshop en boekhoudprogramma Twinfield tot stand gebracht! Zeer flexibel opgesteld en laten zien dat zij houden van een uitdaging!"</p>
+        <div class="flex items-center gap-4">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/Martijn-Licht.jpg" alt="Martijn Licht" class="w-14 h-14 rounded-full object-cover">
+          <div>
+            <p class="font-display font-semibold text-sm">Martijn Licht</p>
+            <p class="text-white/30 text-xs">CEO — No Shirt</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="text-white/60 leading-relaxed mb-8">"Het is een hele fijne partij die ons op alle IT-facetten ontzorgt. Ze denken out the box, zijn flexibel en issues worden altijd opgelost. Lieve mensen om mee samen te werken."</p>
+        <div class="flex items-center gap-4">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/john-swaab.jpg" alt="John Swaab" class="w-14 h-14 rounded-full object-cover">
+          <div>
+            <p class="font-display font-semibold text-sm">John Swaab</p>
+            <p class="text-white/30 text-xs">CEO — Het Portaal</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="testimonial fade-in">
-   <p>"Bij de ontwikkeling van onze webshop hebben we in Tauros een krachtige partner gevonden. No-nonsense, houdt zich aan deadlines..."</p>
-   <div class="author"><img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/guido-verhagen-1.jpg" alt="Guido Verhagen"><div><strong>Guido Verhagen</strong><span>Commercial Director — Profuomo</span></div></div>
-  </div>
-  <div class="testimonial fade-in">
-   <p>"Tauros heeft op perfecte wijze een koppeling tussen onze webshop en boekhoudprogramma Twinfield tot stand gebracht!"</p>
-   <div class="author"><img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/Martijn-Licht.jpg" alt="Martijn Licht"><div><strong>Martijn Licht</strong><span>CEO — No Shirt</span></div></div>
-  </div>
-  <div class="testimonial fade-in">
-   <p>"Het is een hele fijne partij die ons op alle IT-facetten ontzorgt. Ze denken out the box, zijn flexibel..."</p>
-   <div class="author"><img src="https://www.taurosmedia.com/wp-content/uploads/2014/06/john-swaab.jpg" alt="John Swaab"><div><strong>John Swaab</strong><span>CEO — Het Portaal</span></div></div>
-  </div>
- </div>
 </section>
 
-<!-- FEATURED / MOTTO -->
-<section class="featured">
- <p class="quote">"Geen uitdaging is ons te groot, want wij zijn Tauros."</p>
- <p class="motto"><strong>B2B</strong> / Strategie / Techniek / Marketing / Hosting / Support</p>
+<!-- ABOUT / CTA -->
+<section id="about" class="py-32 relative overflow-hidden">
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-teal/5 rounded-full blur-[150px]"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center split-section">
+      <div class="reveal-left">
+        <div class="relative">
+          <img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/home-slider.jpg" alt="Tauros Office" class="w-full rounded-2xl">
+          <div class="absolute -bottom-6 -right-6 bg-dark-300 border border-white/10 rounded-xl p-6">
+            <p class="font-display text-4xl font-bold text-gold">15+</p>
+            <p class="text-white/40 text-sm">Jaar ervaring</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="font-display text-teal text-sm tracking-[4px] uppercase">Over Tauros</span>
+        <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 mb-6">Geen uitdaging<br>is ons te groot<span class="text-gold">.</span></h2>
+        <p class="text-white/40 leading-relaxed mb-6">
+          Sinds 2008 is Tauros Media uitgegroeid tot een van de meest gerenommeerde full-service e-commerce- en blockchain bureaus wereldwijd. Ons geheim? Onze unieke aanpak met klant- en resultaatgerichte focus.
+        </p>
+        <p class="text-white/40 leading-relaxed mb-8">
+          Multidisciplinaire teams staan garant voor de oplossing. Verwacht een eerlijke en open communicatie met een borrel na het behalen van mooie resultaten. Want succes moet gevierd worden.
+        </p>
+        <div class="flex gap-8">
+          <div><p class="font-display text-2xl font-bold text-teal-light">64</p><p class="text-white/30 text-xs">Developers</p></div>
+          <div><p class="font-display text-2xl font-bold text-teal-light">350+</p><p class="text-white/30 text-xs">Marketing projects</p></div>
+          <div><p class="font-display text-2xl font-bold text-teal-light">24/7</p><p class="text-white/30 text-xs">Support</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- APPROACH CTA -->
-<div class="approach">
- <h2>Klaar voor de volgende stap?</h2>
- <p>Laat ons samen uw e-commerce ambities waarmaken. Van concept tot realisatie.</p>
- <div class="tags"><span>Magento</span><span>WordPress</span><span>Blockchain</span><span>Apps</span><span>Modules</span><span>Maatwerk</span></div>
-</div>
+<div class="h-line"></div>
+
+<!-- CONTACT CTA -->
+<section id="contact" class="py-32 text-center">
+  <div class="max-w-3xl mx-auto px-6">
+    <p class="font-display text-gold text-sm tracking-[4px] uppercase mb-6 reveal">Ready?</p>
+    <h2 class="font-display text-5xl md:text-7xl font-bold mb-8 reveal" style="transition-delay:0.1s">
+      Let's build<br>something <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal to-gold">great</span><span class="text-gold">.</span>
+    </h2>
+    <p class="text-white/40 text-lg mb-12 reveal" style="transition-delay:0.2s">
+      Wilt u weten wat wij voor u kunnen betekenen? Neem direct contact op.
+    </p>
+    <div class="reveal" style="transition-delay:0.3s">
+      <a href="mailto:info@taurosmedia.com" class="magnetic-btn"><span>Neem contact op →</span></a>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
-<footer id="contact">
- <img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/main-logo.png" alt="Tauros Media">
- <p>&copy; 2008 - 2026 Tauros Media. Alle rechten voorbehouden.</p>
- <p class="credit">Website concept door <strong>The Business Booster</strong></p>
+<footer class="border-t border-white/5 py-10">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <img src="https://www.taurosmedia.com/wp-content/uploads/2019/10/main-logo.png" alt="Tauros Media" class="h-8 opacity-40">
+    <p class="text-white/20 text-sm">Website concept door <a href="https://thebusinessbooster.nl" class="text-gold/60 hover:text-gold transition-colors">The Business Booster</a></p>
+  </div>
 </footer>
 
 <script>
-// Hero slider
-const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.slider-dots span');
-let current=0;
-function goSlide(n){slides[current].classList.remove('active');dots[current].classList.remove('active');current=n;slides[current].classList.add('active');dots[current].classList.add('active')}
-setInterval(()=>goSlide((current+1)%slides.length),5000);
-dots.forEach((d,i)=>d.addEventListener('click',()=>goSlide(i)));
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
 
-// Scroll animations
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.15});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 50 ? 'rgba(10,10,10,0.95)' : 'transparent';
+  nav.style.backdropFilter = window.scrollY > 50 ? 'blur(20px)' : 'none';
+  nav.style.borderBottom = window.scrollY > 50 ? '1px solid rgba(255,255,255,0.05)' : 'none';
+});
+
+// Hero image slider
+const heroImages = [
+  'https://www.taurosmedia.com/wp-content/uploads/2019/10/amg-petronas.jpg',
+  'https://www.taurosmedia.com/wp-content/uploads/2019/10/tauros-profuomo.jpg',
+  'https://www.taurosmedia.com/wp-content/uploads/2019/10/home-slider.jpg',
+  'https://www.taurosmedia.com/wp-content/uploads/2020/01/enterprise-webshop-Blokker.jpg'
+];
+let heroIdx = 0;
+const heroImg = document.getElementById('heroImg');
+setInterval(() => {
+  heroIdx = (heroIdx + 1) % heroImages.length;
+  heroImg.style.opacity = '0';
+  setTimeout(() => {
+    heroImg.src = heroImages[heroIdx];
+    heroImg.style.opacity = '1';
+  }, 600);
+}, 5000);
+heroImg.style.transition = 'opacity 0.8s ease';
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach(el => observer.observe(el));
 
 // Animated counters
-let counted=false;
-const statsObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!counted){counted=true;document.querySelectorAll('.counter').forEach(c=>{const t=+c.dataset.target;let n=0;const step=Math.ceil(t/60);const timer=setInterval(()=>{n+=step;if(n>=t){n=t;clearInterval(timer)}c.textContent=n+'+'},30)})}})},{threshold:.3});
-document.querySelectorAll('.stats').forEach(el=>statsObs.observe(el));
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const duration = 2000;
+      const start = performance.now();
+      const animate = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(target * eased);
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 </script>
 </body>
 </html>
