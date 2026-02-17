@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tauros Media — E-Commerce & Blockchain Partner</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0a0f;--bg2:#111118;--text:#f0f0f5;--accent:#6c5ce7;--accent2:#a29bfe;
+--gold:#f4c542;--gradient:linear-gradient(135deg,#6c5ce7,#a29bfe,#74b9ff);
+--glow:0 0 40px rgba(108,92,231,.3);
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#6c5ce7 #0a0a0f}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
+::selection{background:#6c5ce7;color:#fff}
+
+/* Custom cursor */
+.cursor{position:fixed;width:20px;height:20px;border:2px solid var(--accent2);border-radius:50%;pointer-events:none;z-index:10000;transition:transform .15s,opacity .15s;mix-blend-mode:difference}
+.cursor-dot{position:fixed;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:10001;transition:transform .08s}
+.cursor.hover{transform:scale(2.5);border-color:var(--gold);opacity:.6}
+
+/* Grain overlay */
+.grain{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.035}
+.grain::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px;animation:grainAnim 0.5s steps(1) infinite}
+@keyframes grainAnim{0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-10%)}30%{transform:translate(3%,-15%)}50%{transform:translate(12%,9%)}70%{transform:translate(9%,4%)}90%{transform:translate(-1%,7%)}}
+
+/* Glow mouse follower */
+.mouse-glow{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(108,92,231,.08) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s}
+
+/* Navigation */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(10,10,15,.6);border-bottom:1px solid rgba(108,92,231,.1);transition:all .4s}
+nav.scrolled{padding:1rem 3rem;background:rgba(10,10,15,.9)}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-1px}
+.nav-logo span{font-weight:300;opacity:.7}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:rgba(240,240,245,.6);text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color .3s,transform .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gradient);transition:width .3s}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.menu-toggle span{width:25px;height:2px;background:#fff;transition:all .3s}
+
+/* Hero Section */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow:hidden;padding:2rem}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg canvas{width:100%;height:100%}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:1000px}
+.hero-badge{display:inline-block;padding:.5rem 1.5rem;border:1px solid rgba(108,92,231,.4);border-radius:50px;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:2rem;animation:fadeInUp .8s .2s both}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,8vw,7rem);font-weight:700;line-height:.95;letter-spacing:-3px;margin-bottom:1.5rem}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line-inner{display:block;animation:slideUp .8s cubic-bezier(.16,1,.3,1) both}
+.hero h1 .line:nth-child(2) .line-inner{animation-delay:.15s}
+.hero h1 .line:nth-child(3) .line-inner{animation-delay:.3s}
+.hero h1 .gradient-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% 200%;animation:gradientMove 4s ease infinite}
+@keyframes gradientMove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes slideUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-sub{font-size:clamp(1rem,2vw,1.3rem);color:rgba(240,240,245,.5);max-width:600px;margin:0 auto 2.5rem;animation:fadeInUp .8s .5s both;line-height:1.7;font-weight:300}
+.hero-cta{display:inline-flex;gap:1rem;animation:fadeInUp .8s .7s both;flex-wrap:wrap;justify-content:center}
+.btn{padding:1rem 2.5rem;border-radius:60px;font-size:.9rem;font-weight:600;text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:var(--glow)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 0 60px rgba(108,92,231,.5)}
+.btn-outline{border:1px solid rgba(240,240,245,.2);color:#fff;background:transparent}
+.btn-outline:hover{border-color:var(--accent);background:rgba(108,92,231,.1);transform:translateY(-3px)}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;animation:fadeInUp 1s 1.2s both}
+.scroll-indicator span{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,240,245,.3)}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* Section styling */
+section{padding:8rem 3rem;position:relative}
+.section-label{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.section-label::before{content:'';width:40px;height:1px;background:var(--accent)}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;letter-spacing:-2px;line-height:1.1;margin-bottom:1.5rem}
+.section-desc{font-size:1.1rem;color:rgba(240,240,245,.5);max-width:600px;line-height:1.8;font-weight:300}
+
+/* Stats Bar */
+.stats-bar{display:flex;justify-content:center;gap:4rem;padding:4rem 3rem;border-top:1px solid rgba(108,92,231,.1);border-bottom:1px solid rgba(108,92,231,.1);background:rgba(108,92,231,.03);flex-wrap:wrap}
+.stat{text-align:center}
+.stat-number{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.stat-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:rgba(240,240,245,.4);margin-top:.5rem}
+
+/* Services */
+.services{background:var(--bg2)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem;margin-top:3rem;max-width:1200px}
+.service-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;transition:all .5s cubic-bezier(.16,1,.3,1);transform-style:preserve-3d;perspective:1000px}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(108,92,231,.1),transparent);opacity:0;transition:opacity .5s;border-radius:20px}
+.service-card:hover{transform:translateY(-8px);border-color:rgba(108,92,231,.3);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.service-card:hover::before{opacity:1}
+.service-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,rgba(108,92,231,.2),rgba(162,155,254,.2));display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.5rem;position:relative;z-index:1}
+.service-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:.8rem;position:relative;z-index:1}
+.service-card p{color:rgba(240,240,245,.5);font-size:.9rem;line-height:1.7;position:relative;z-index:1}
+.service-number{position:absolute;top:1.5rem;right:1.5rem;font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:700;color:rgba(108,92,231,.06);line-height:1}
+
+/* Clients */
+.clients-marquee{overflow:hidden;padding:4rem 0;border-top:1px solid rgba(108,92,231,.1);border-bottom:1px solid rgba(108,92,231,.1)}
+.marquee-track{display:flex;gap:4rem;animation:marquee 30s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+.client-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:600;color:rgba(240,240,245,.12);white-space:nowrap;transition:color .3s}
+.client-name:hover{color:rgba(240,240,245,.4)}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Portfolio */
+.portfolio{background:var(--bg)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;max-width:1400px}
+.portfolio-item{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:var(--bg2);border:1px solid rgba(255,255,255,.05);transition:all .5s cubic-bezier(.16,1,.3,1)}
+.portfolio-item:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+.portfolio-item:nth-child(4){grid-column:span 2}
+.portfolio-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.95) 0%,rgba(10,10,15,.2) 50%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;opacity:0;transition:opacity .4s}
+.portfolio-item:hover .overlay{opacity:1}
+.portfolio-item:hover{transform:scale(1.02);border-color:rgba(108,92,231,.3)}
+.portfolio-item .overlay h3{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:600;margin-bottom:.3rem}
+.portfolio-item .overlay span{font-size:.8rem;color:var(--accent2);letter-spacing:1px;text-transform:uppercase}
+.portfolio-item .bg-gradient{position:absolute;inset:0;opacity:.8}
+.portfolio-item:nth-child(1) .bg-gradient{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)}
+.portfolio-item:nth-child(2) .bg-gradient{background:linear-gradient(135deg,#2d1b69,#11998e)}
+.portfolio-item:nth-child(3) .bg-gradient{background:linear-gradient(135deg,#0c0c1d,#302b63)}
+.portfolio-item:nth-child(4) .bg-gradient{background:linear-gradient(135deg,#141e30,#243b55)}
+.portfolio-item:nth-child(5) .bg-gradient{background:linear-gradient(135deg,#0d0d0d,#6c5ce7)}
+.portfolio-item:nth-child(6) .bg-gradient{background:linear-gradient(135deg,#1a1a2e,#e94560)}
+.portfolio-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:rgba(255,255,255,.15);letter-spacing:2px;text-transform:uppercase;transition:all .4s}
+.portfolio-item:hover .portfolio-logo{opacity:0;transform:translate(-50%,-50%) scale(.8)}
+
+/* Testimonials */
+.testimonials{background:var(--bg2);overflow:hidden}
+.testimonial-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:3rem;max-width:800px;margin:3rem auto 0;position:relative}
+.testimonial-card::before{content:'"';position:absolute;top:-10px;left:2rem;font-family:'Space Grotesk',sans-serif;font-size:8rem;color:rgba(108,92,231,.15);line-height:1}
+.testimonial-text{font-size:1.1rem;line-height:1.9;color:rgba(240,240,245,.7);font-style:italic;position:relative;z-index:1;margin-bottom:2rem}
+.testimonial-author{display:flex;align-items:center;gap:1rem}
+.testimonial-avatar{width:50px;height:50px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem}
+.testimonial-info h4{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem}
+.testimonial-info span{font-size:.8rem;color:var(--accent2)}
+.testimonial-nav{display:flex;justify-content:center;gap:.8rem;margin-top:2rem}
+.testimonial-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s}
+.testimonial-dot.active{background:var(--accent);width:24px;border-radius:4px}
+
+/* CTA Section */
+.cta-section{padding:10rem 3rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(108,92,231,.15),transparent 70%)}
+.cta-section .section-title{max-width:700px;margin:0 auto 1.5rem}
+.cta-section .section-desc{margin:0 auto 3rem;text-align:center}
+
+/* Contact */
+.contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem;max-width:1100px}
+.contact-info{display:flex;flex-direction:column;gap:2rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-item .icon{width:44px;height:44px;border-radius:12px;background:rgba(108,92,231,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.contact-item h4{font-family:'Space Grotesk',sans-serif;font-weight:600;margin-bottom:.3rem}
+.contact-item p{color:rgba(240,240,245,.5);font-size:.9rem;line-height:1.6}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{position:relative}
+.form-group input,.form-group textarea{width:100%;padding:1rem 1.2rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;font-family:'Inter',sans-serif;font-size:.9rem;transition:all .3s;outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 20px rgba(108,92,231,.15)}
+.form-group textarea{height:120px;resize:none}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(240,240,245,.25)}
+
+/* Footer */
+footer{padding:3rem;text-align:center;border-top:1px solid rgba(108,92,231,.1)}
+footer p{color:rgba(240,240,245,.3);font-size:.8rem}
+footer .credit{margin-top:.5rem;color:var(--accent2);font-weight:500;font-size:.85rem}
+footer .credit a{color:var(--accent);text-decoration:none}
+
+/* Reveal animations */
+.reveal{opacity:0;transform:translateY(60px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-60px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.9);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+.stagger>*{opacity:0;transform:translateY(40px);transition:all .6s cubic-bezier(.16,1,.3,1)}
+.stagger.visible>*:nth-child(1){transition-delay:.05s;opacity:1;transform:translateY(0)}
+.stagger.visible>*:nth-child(2){transition-delay:.1s;opacity:1;transform:translateY(0)}
+.stagger.visible>*:nth-child(3){transition-delay:.15s;opacity:1;transform:translateY(0)}
+.stagger.visible>*:nth-child(4){transition-delay:.2s;opacity:1;transform:translateY(0)}
+.stagger.visible>*:nth-child(5){transition-delay:.25s;opacity:1;transform:translateY(0)}
+.stagger.visible>*:nth-child(6){transition-delay:.3s;opacity:1;transform:translateY(0)}
+
+/* Floating shapes */
+.shapes{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.shape{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:float 20s ease-in-out infinite}
+.shape-1{width:400px;height:400px;background:#6c5ce7;top:10%;left:-5%;animation-delay:0s}
+.shape-2{width:300px;height:300px;background:#a29bfe;bottom:10%;right:-5%;animation-delay:-7s}
+.shape-3{width:200px;height:200px;background:#74b9ff;top:50%;left:50%;animation-delay:-14s}
+@keyframes float{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(30px,-40px) rotate(5deg)}50%{transform:translate(-20px,30px) rotate(-5deg)}75%{transform:translate(40px,20px) rotate(3deg)}}
+
+/* Horizontal line */
+.h-line{width:80px;height:1px;background:var(--gradient);margin:2rem 0}
+
+/* Magnetic button */
+.magnetic{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+
+/* Mobile */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none;position:fixed;inset:0;background:rgba(10,10,15,.98);flex-direction:column;align-items:center;justify-content:center;gap:2rem;backdrop-filter:blur(20px)}
+  .nav-links.open{display:flex}
+  .menu-toggle{display:flex}
+  section{padding:5rem 1.5rem}
+  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-item:nth-child(1),.portfolio-item:nth-child(4){grid-column:span 1}
+  .contact-grid{grid-template-columns:1fr}
+  .stats-bar{gap:2rem;padding:3rem 1.5rem}
+  .services-grid{grid-template-columns:1fr}
+  body{cursor:auto}
+  .cursor,.cursor-dot,.mouse-glow{display:none}
+  .hero h1{letter-spacing:-1px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="mouse-glow" id="mouseGlow"></div>
+<div class="grain"></div>
+
+<!-- Navigation -->
+<nav id="nav">
+  <div class="nav-logo">TAUROS <span>MEDIA</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#diensten">Diensten</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#testimonials">Klanten</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="menu-toggle" id="menuToggle" onclick="document.getElementById('navLinks').classList.toggle('open');this.classList.toggle('active')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"><canvas id="heroCanvas"></canvas></div>
+  <div class="shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Sinds 2008 — Amsterdam</div>
+    <h1>
+      <span class="line"><span class="line-inner">Uw E-Commerce</span></span>
+      <span class="line"><span class="line-inner"><span class="gradient-text">& Blockchain</span></span></span>
+      <span class="line"><span class="line-inner">Partner.</span></span>
+    </h1>
+    <p class="hero-sub">Full-service e-commerce & blockchain bureau. Van strategie tot techniek, van creatie tot marketing. Wij ontzorgen u volledig.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary magnetic">Start Uw Project</a>
+      <a href="#portfolio" class="btn btn-outline magnetic">Bekijk Cases</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <div class="stat-number" data-target="500">0</div>
+    <div class="stat-label">Modules & Apps</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number" data-target="1300">0</div>
+    <div class="stat-label">Trouwe Relaties</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number" data-target="750">0</div>
+    <div class="stat-label">Websites & Webshops</div>
+  </div>
+  <div class="stat reveal">
+    <div class="stat-number" data-target="64">0</div>
+    <div class="stat-label">Developers</div>
+  </div>
+</div>
+
+<!-- Services -->
+<section class="services" id="diensten">
+  <div class="section-label reveal">Wat wij doen</div>
+  <div class="section-title reveal">Alles onder <span class="gradient-text">één dak</span></div>
+  <div class="section-desc reveal">Met onze unieke aanpak en branchespecifieke oplossingen ontzorgen wij u volledig. Van strategie tot uitvoering.</div>
+  <div class="services-grid stagger">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <div class="service-icon">🎯</div>
+      <h3>Strategie</h3>
+      <p>Een doeltreffende omnichannel strategie op maat. Wij begrijpen uw doelgroep en vertalen behoeften naar resultaat.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <div class="service-icon">✨</div>
+      <h3>Creatie</h3>
+      <p>Designs met de ideale mix van branding, gebruiksvriendelijkheid en conversie. Jarenlange expertise in UX/UI design.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <div class="service-icon">⚡</div>
+      <h3>Techniek</h3>
+      <p>64 ontwikkelaars gespecialiseerd in Magento, WordPress, Blockchain, Java, .NET, mobiele apps en meer.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">04</div>
+      <div class="service-icon">📈</div>
+      <h3>Marketing</h3>
+      <p>Van SEO en Google Ads tot social media en e-mail marketing. Een slimme strategie op maat voor uw doelstellingen.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">05</div>
+      <div class="service-icon">🔗</div>
+      <h3>Blockchain</h3>
+      <p>Pioniers op het gebied van blockchain technologie. Private commerce oplossingen die de toekomst van e-commerce vormgeven.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-number">06</div>
+      <div class="service-icon">🛡️</div>
+      <h3>Hosting & Support</h3>
+      <p>Managed hosting met 24/7 support. Server optimalisatie, backups en systeemupdates. De ultieme SAAS-beleving.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Client Marquee -->
+<div class="clients-marquee">
+  <div class="marquee-track">
+    <span class="client-name">Williams F1</span>
+    <span class="client-name">•</span>
+    <span class="client-name">AMG Petronas</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Profuomo</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Brabantia</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Just Eat</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Vingino</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Bergsala</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Sandton</span>
+    <span class="client-name">•</span>
+    <span class="client-name">FacilityLinQ</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Michaelis</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Williams F1</span>
+    <span class="client-name">•</span>
+    <span class="client-name">AMG Petronas</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Profuomo</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Brabantia</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Just Eat</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Vingino</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Bergsala</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Sandton</span>
+    <span class="client-name">•</span>
+    <span class="client-name">FacilityLinQ</span>
+    <span class="client-name">•</span>
+    <span class="client-name">Michaelis</span>
+    <span class="client-name">•</span>
+  </div>
+</div>
+
+<!-- Portfolio -->
+<section class="portfolio" id="portfolio">
+  <div class="section-label reveal">Ons werk</div>
+  <div class="section-title reveal">Succes <span class="gradient-text">cases</span></div>
+  <div class="section-desc reveal">Meer dan 1.100 klanten gingen u al voor. Van gerenommeerde multinationals tot ambitieuze start-ups.</div>
+  <div class="portfolio-grid stagger">
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">Williams F1</span>
+      <div class="overlay"><h3>Williams Racing</h3><span>Automotive / E-Commerce / Omnichannel</span></div>
+    </div>
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">AMG Petronas</span>
+      <div class="overlay"><h3>AMG Petronas</h3><span>Automotive / Strategie / Techniek</span></div>
+    </div>
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">Profuomo</span>
+      <div class="overlay"><h3>Profuomo</h3><span>Fashion / Full-Service E-Commerce</span></div>
+    </div>
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">Brabantia</span>
+      <div class="overlay"><h3>Brabantia</h3><span>Audit / Strategie / Consultancy</span></div>
+    </div>
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">Vingino</span>
+      <div class="overlay"><h3>Vingino</h3><span>Fashion / Strategie / Techniek</span></div>
+    </div>
+    <div class="portfolio-item reveal-scale">
+      <div class="bg-gradient"></div>
+      <span class="portfolio-logo">Just Eat</span>
+      <div class="overlay"><h3>Just Eat</h3><span>Food / App Development / Consultancy</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label reveal">Klanten aan het woord</div>
+  <div class="section-title reveal">Wat onze klanten <span class="gradient-text">zeggen</span></div>
+  <div class="testimonial-card reveal" id="testimonialCard">
+    <p class="testimonial-text" id="testimonialText">Voor de race teams die wij vertegenwoordigen waren we op zoek naar een Magento partner die snel en flexibel kon zijn. Tauros heeft diverse webshops opgeleverd en ons tevens ondersteund met de integratie van ons ERP systeem, e-mail marketing en performance verbeteringen. Tauros werkt flexibel en efficiënt.</p>
+    <div class="testimonial-author">
+      <div class="testimonial-avatar" id="testimonialAvatar">CK</div>
+      <div class="testimonial-info">
+        <h4 id="testimonialName">Carlo Klaasse</h4>
+        <span id="testimonialRole">E-commerce Manager — Puma/Branded</span>
+      </div>
+    </div>
+  </div>
+  <div class="testimonial-nav" id="testimonialNav">
+    <div class="testimonial-dot active" data-index="0"></div>
+    <div class="testimonial-dot" data-index="1"></div>
+    <div class="testimonial-dot" data-index="2"></div>
+    <div class="testimonial-dot" data-index="3"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+  </div>
+  <div class="section-label reveal" style="justify-content:center">Let's connect</div>
+  <div class="section-title reveal" style="text-align:center">Sit back. Relax.<br><span class="gradient-text">Enjoy the view.</span></div>
+  <p class="section-desc reveal" style="text-align:center;margin:1.5rem auto 3rem">Geen uitdaging is ons te groot. Wilt u weten wat wij voor u kunnen betekenen? Neem direct contact op.</p>
+  <a href="#contact" class="btn btn-primary magnetic reveal" style="display:inline-block">Neem Contact Op</a>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="section-label reveal">Neem contact op</div>
+  <div class="section-title reveal">Laten we <span class="gradient-text">praten</span></div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        <div>
+          <h4>Kantoor</h4>
+          <p>Tauros Media Nederland B.V.<br>Van Baerlestraat 124<br>1071 BD Amsterdam</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">📞</div>
+        <div>
+          <h4>Telefoon</h4>
+          <p>+31 (0)20 7721309</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">✉️</div>
+        <div>
+          <h4>E-mail</h4>
+          <p>info@taurosmedia.com</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🏢</div>
+        <div>
+          <h4>KVK</h4>
+          <p>530277287</p>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="event.preventDefault()">
+      <div class="form-group"><input type="text" placeholder="Uw naam"></div>
+      <div class="form-group"><input type="email" placeholder="E-mailadres"></div>
+      <div class="form-group"><input type="text" placeholder="Bedrijfsnaam"></div>
+      <div class="form-group"><textarea placeholder="Uw bericht..."></textarea></div>
+      <button type="submit" class="btn btn-primary magnetic" style="border:none;cursor:pointer;font-family:inherit">Verstuur Bericht</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2024 Tauros Media Nederland B.V. — Alle rechten voorbehouden.</p>
+  <p class="credit">Website concept door <a href="#">The Business Booster</a></p>
+</footer>
+
+<script>
+// Particle canvas
+(function(){
+  const c=document.getElementById('heroCanvas'),ctx=c.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  class Particle{
+    constructor(){this.reset()}
+    reset(){this.x=Math.random()*w;this.y=Math.random()*h;this.size=Math.random()*2+.5;this.speedX=(Math.random()-.5)*.3;this.speedY=(Math.random()-.5)*.3;this.opacity=Math.random()*.5+.1}
+    update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x<0||this.x>w)this.speedX*=-1;if(this.y<0||this.y>h)this.speedY*=-1}
+    draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fillStyle=`rgba(108,92,231,${this.opacity})`;ctx.fill()}
+  }
+  for(let i=0;i<80;i++)particles.push(new Particle());
+  function animate(){ctx.clearRect(0,0,w,h);particles.forEach(p=>{p.update();p.draw()});
+  // draw lines between close particles
+  for(let i=0;i<particles.length;i++){for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(108,92,231,${.08*(1-dist/120)})`;ctx.stroke()}}}
+  requestAnimationFrame(animate)}animate()
+})();
+
+// Custom cursor
+const cursor=document.getElementById('cursor'),cursorDot=document.getElementById('cursorDot'),mouseGlow=document.getElementById('mouseGlow');
+let mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursorDot.style.left=mx-3+'px';cursorDot.style.top=my-3+'px';mouseGlow.style.left=mx+'px';mouseGlow.style.top=my+'px'});
+(function animCursor(){cursor.style.left=cursor.offsetLeft+(mx-cursor.offsetLeft-10)*.12+'px';cursor.style.top=cursor.offsetTop+(my-cursor.offsetTop-10)*.12+'px';requestAnimationFrame(animCursor)})();
+document.querySelectorAll('a,button,.service-card,.portfolio-item,.testimonial-dot').forEach(el=>{el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'))});
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+
+// Reveal on scroll
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(!e.target.classList.contains('stagger'))observer.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-scale,.stagger').forEach(el=>observer.observe(el));
+
+// Counter animation
+const counterObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,target=+el.dataset.target;let current=0;const step=target/60;const timer=setInterval(()=>{current+=step;if(current>=target){current=target;clearInterval(timer)}el.textContent=Math.floor(current)+'+'},25);counterObs.unobserve(el)}})},{threshold:.5});
+document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
+
+// Testimonials
+const testimonials=[
+  {text:"Voor de race teams die wij vertegenwoordigen waren we op zoek naar een Magento partner die snel en flexibel kon zijn. Tauros heeft diverse webshops opgeleverd en ons tevens ondersteund met de integratie van ons ERP systeem, e-mail marketing en performance verbeteringen. Tauros werkt flexibel en efficiënt.",name:"Carlo Klaasse",role:"E-commerce Manager — Puma/Branded",initials:"CK"},
+  {text:"Bij de ontwikkeling van onze webshop hebben we in Tauros een krachtige partner gevonden. No-nonsense, houdt zich aan deadlines, en kan omgaan met de complexiteit van vele type van IT koppelingen. Tauros ondersteunt ons ook op het gebied van consultancy, online marketing, hosting en security.",name:"Guido Verhagen",role:"Commercial Director — Profuomo",initials:"GV"},
+  {text:"Tauros heeft op perfecte wijze een koppeling tussen onze webshop en boekhoudprogramma Twinfield tot stand gebracht! Tauros heeft zich zeer flexibel opgesteld. En laten zien dat zij houden van een uitdaging!",name:"Martijn Licht",role:"CEO — No Shirt",initials:"ML"},
+  {text:"Het is een hele fijne partij die ons op alle IT-facetten ontzorgt. Ze denken 'out the box', zijn flexibel en issues worden altijd opgelost. Voor mij persoonlijk is het belangrijk dat het lieve mensen zijn om mee samen te werken.",name:"John Swaab",role:"CEO — Het Portaal",initials:"JS"}
+];
+let currentTestimonial=0;
+function setTestimonial(i){currentTestimonial=i;const t=testimonials[i];document.getElementById('testimonialText').textContent=t.text;document.getElementById('testimonialName').textContent=t.name;document.getElementById('testimonialRole').textContent=t.role;document.getElementById('testimonialAvatar').textContent=t.initials;document.querySelectorAll('.testimonial-dot').forEach((d,idx)=>d.classList.toggle('active',idx===i))}
+document.querySelectorAll('.testimonial-dot').forEach(d=>d.addEventListener('click',()=>setTestimonial(+d.dataset.index)));
+setInterval(()=>setTestimonial((currentTestimonial+1)%testimonials.length),6000);
+
+// Magnetic buttons
+document.querySelectorAll('.magnetic').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();const x=e.clientX-r.left-r.width/2;const y=e.clientY-r.top-r.height/2;btn.style.transform=`translate(${x*.3}px,${y*.3}px)`});
+  btn.addEventListener('mouseleave',()=>{btn.style.transform=''})
+});
+
+// 3D tilt on service cards
+document.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;card.style.transform=`translateY(-8px) rotateY(${x*10}deg) rotateX(${-y*10}deg)`});
+  card.addEventListener('mouseleave',()=>{card.style.transform=''})
+});
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});document.getElementById('navLinks').classList.remove('open')})});
+</script>
+</body>
+</html>
